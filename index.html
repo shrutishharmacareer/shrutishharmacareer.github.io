@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shruti Sharma — Data Scientist & Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --black: #0a0a0a;
+    --cream: #f5f0e8;
+    --amber: #e8a020;
+    --rust: #c44b2a;
+    --sage: #3d6b5c;
+    --muted: #9a9080;
+    --white: #fefefe;
+    --card-bg: #111111;
+    --border: rgba(232,160,32,0.2);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'Syne', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--amber);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid var(--amber);
+    border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.15s ease;
+    opacity: 0.5;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem 4rem;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--amber);
+    letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--amber); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid-bg {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(232,160,32,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(232,160,32,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridDrift 30s linear infinite;
+  }
+  @keyframes gridDrift {
+    0% { background-position: 0 0; }
+    100% { background-position: 60px 60px; }
+  }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    color: var(--amber);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(4rem, 10vw, 9rem);
+    font-weight: 900;
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.4s forwards;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--amber);
+  }
+  .hero-tagline {
+    margin-top: 2rem;
+    font-size: clamp(1rem, 2.2vw, 1.35rem);
+    color: var(--muted);
+    max-width: 580px;
+    line-height: 1.6;
+    font-weight: 400;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.6s forwards;
+  }
+  .hero-stats {
+    display: flex; gap: 3rem;
+    margin-top: 3.5rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.8s forwards;
+  }
+  .stat-item { }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: var(--amber);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.3rem;
+  }
+  .hero-ctas {
+    display: flex; gap: 1.2rem; flex-wrap: wrap;
+    margin-top: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 1s forwards;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: none;
+    transition: all 0.25s;
+  }
+  .btn-primary {
+    background: var(--amber);
+    color: var(--black);
+  }
+  .btn-primary:hover { background: var(--cream); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--cream);
+    border: 1px solid rgba(245,240,232,0.25);
+  }
+  .btn-outline:hover { border-color: var(--amber); color: var(--amber); transform: translateY(-2px); }
+
+  .hero-scroll-hint {
+    position: absolute; bottom: 2.5rem; left: 4rem;
+    display: flex; align-items: center; gap: 0.8rem;
+    color: var(--muted);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 0.9s 1.4s forwards;
+  }
+  .scroll-line {
+    width: 48px; height: 1px;
+    background: var(--amber);
+    animation: lineGrow 2s 1.6s ease-out forwards;
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+  @keyframes lineGrow { to { transform: scaleX(1); } }
+
+  .hero-accent {
+    position: absolute;
+    right: -60px; top: 50%;
+    transform: translateY(-50%);
+    width: min(500px, 45vw);
+    height: min(500px, 45vw);
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, rgba(232,160,32,0.12), transparent 70%);
+    pointer-events: none;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTION COMMONS */
+  section { padding: 7rem 4rem; }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 3.5rem;
+  }
+  .section-title em { font-style: italic; color: var(--amber); }
+
+  /* ABOUT */
+  #about { background: var(--black); }
+
+  /* Photo + intro row */
+  .about-intro {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 4rem;
+    align-items: start;
+    margin-bottom: 4rem;
+  }
+  .photo-wrapper {
+    position: relative;
+    flex-shrink: 0;
+  }
+  .photo-frame {
+    width: 260px;
+    height: 320px;
+    position: relative;
+    border: 1px solid var(--border);
+  }
+  /* Decorative corner accents */
+  .photo-frame::before, .photo-frame::after {
+    content: '';
+    position: absolute;
+    width: 24px; height: 24px;
+    border-color: var(--amber);
+    border-style: solid;
+  }
+  .photo-frame::before {
+    top: -6px; left: -6px;
+    border-width: 2px 0 0 2px;
+  }
+  .photo-frame::after {
+    bottom: -6px; right: -6px;
+    border-width: 0 2px 2px 0;
+  }
+  .photo-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, #1a1612 0%, #111 60%, #181410 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .photo-placeholder:hover { background: linear-gradient(145deg, #201a14 0%, #151515 60%, #1e1710 100%); }
+  /* Subtle noise texture overlay */
+  .photo-placeholder::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .photo-icon {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    background: rgba(232,160,32,0.1);
+    border: 1px dashed rgba(232,160,32,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem;
+    animation: breathe 3s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.05); opacity: 1; }
+  }
+  .photo-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(232,160,32,0.5);
+    text-align: center;
+    line-height: 1.6;
+  }
+  .photo-upload-hint {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: rgba(154,144,128,0.4);
+    letter-spacing: 0.1em;
+    text-align: center;
+    padding: 0 1rem;
+  }
+  /* Decorative offset box behind photo */
+  .photo-shadow-box {
+    position: absolute;
+    top: 12px; left: 12px;
+    width: 260px; height: 320px;
+    border: 1px solid rgba(232,160,32,0.12);
+    z-index: -1;
+  }
+  .photo-name-tag {
+    margin-top: 1.2rem;
+    text-align: center;
+  }
+  .photo-name-tag strong {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--cream);
+  }
+  .photo-name-tag span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+  .photo-edu {
+    margin-top: 0.6rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .about-text p {
+    color: #b0a898;
+    font-size: 1.05rem;
+    line-height: 1.85;
+    margin-bottom: 1.4rem;
+    font-weight: 400;
+  }
+  .about-text strong { color: var(--cream); }
+
+  @media (max-width: 768px) {
+    .about-intro { grid-template-columns: 1fr; gap: 2rem; }
+    .photo-frame, .photo-shadow-box { width: 200px; height: 240px; }
+    .photo-wrapper { display: flex; flex-direction: column; align-items: center; }
+  }
+  .about-highlights {
+    display: flex; flex-direction: column; gap: 1.2rem;
+  }
+  .highlight-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 1.4rem 1.6rem;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .highlight-card::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--amber);
+  }
+  .highlight-card:hover { border-color: var(--amber); transform: translateX(4px); }
+  .highlight-card h4 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 0.35rem;
+  }
+  .highlight-card p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.5;
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* SKILLS */
+  #skills { background: #0d0d0d; }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .skill-category {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 1.8rem;
+    border-radius: 2px;
+    transition: border-color 0.25s, transform 0.3s;
+  }
+  .skill-category:hover { border-color: var(--amber); transform: translateY(-4px); }
+  .skill-category-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+  }
+  .skill-category h3 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1rem;
+  }
+  .skill-tags {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .skill-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    padding: 0.3rem 0.65rem;
+    background: rgba(232,160,32,0.08);
+    border: 1px solid rgba(232,160,32,0.15);
+    color: #c8bfa8;
+    border-radius: 1px;
+    letter-spacing: 0.05em;
+  }
+
+  /* EXPERIENCE */
+  #experience { background: var(--black); }
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--amber), transparent);
+  }
+  .timeline-item {
+    position: relative;
+    padding: 0 0 3.5rem 2.5rem;
+    opacity: 0;
+    transform: translateX(-16px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+  .timeline-item.visible { opacity: 1; transform: translateX(0); }
+  .timeline-dot {
+    position: absolute;
+    left: -6px; top: 6px;
+    width: 12px; height: 12px;
+    background: var(--amber);
+    border-radius: 50%;
+    border: 2px solid var(--black);
+  }
+  .timeline-meta {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .timeline-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+  .timeline-company {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--amber);
+    padding: 0.15rem 0.6rem;
+    border: 1px solid var(--amber);
+    border-radius: 1px;
+  }
+  .timeline-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.9rem;
+  }
+  .timeline-bullets {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 0.55rem;
+  }
+  .timeline-bullets li {
+    font-size: 0.9rem;
+    color: #a09880;
+    line-height: 1.6;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .timeline-bullets li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--amber);
+    font-size: 0.75rem;
+  }
+  .timeline-bullets li strong { color: var(--cream); }
+  .timeline-tags {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+    margin-top: 0.9rem;
+  }
+  .timeline-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    padding: 0.2rem 0.55rem;
+    background: rgba(61,107,92,0.2);
+    color: #7db8a4;
+    border: 1px solid rgba(61,107,92,0.4);
+    border-radius: 1px;
+  }
+
+  /* PROJECTS */
+  #projects { background: #0d0d0d; }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.8rem;
+  }
+  .project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s, border-color 0.3s;
+  }
+  .project-card.visible { opacity: 1; transform: translateY(0); }
+  .project-card:hover { border-color: var(--amber); transform: translateY(-6px); }
+  .project-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--amber), var(--rust));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .project-card:hover::after { transform: scaleX(1); }
+  .project-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 0.8rem;
+  }
+  .project-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    line-height: 1.3;
+  }
+  .project-desc {
+    font-size: 0.88rem;
+    color: #998f80;
+    line-height: 1.65;
+    margin-bottom: 1.2rem;
+  }
+  .project-impact {
+    background: rgba(232,160,32,0.06);
+    border-left: 2px solid var(--amber);
+    padding: 0.6rem 0.9rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--amber);
+    margin-bottom: 1.2rem;
+    line-height: 1.5;
+  }
+  .project-stack {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+    margin-bottom: 1.2rem;
+  }
+  .stack-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    padding: 0.2rem 0.55rem;
+    background: rgba(232,160,32,0.07);
+    border: 1px solid rgba(232,160,32,0.15);
+    color: #b0a898;
+    border-radius: 1px;
+  }
+  .project-links { display: flex; gap: 1rem; }
+  .project-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--amber);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 0.3rem;
+    transition: gap 0.2s;
+  }
+  .project-link:hover { gap: 0.6rem; }
+
+  /* PUBLICATION */
+  .publication-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    padding: 1.8rem 2rem;
+    border-radius: 2px;
+    margin-bottom: 1rem;
+    display: flex; gap: 2rem; align-items: flex-start;
+    transition: border-color 0.25s;
+  }
+  .publication-card:hover { border-color: var(--amber); }
+  .pub-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+  }
+  .pub-content h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+  }
+  .pub-content p {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 0.6rem;
+  }
+  .pub-link {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--amber);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+  }
+  .pub-link:hover { text-decoration: underline; }
+
+  /* CONTACT */
+  #contact {
+    background: var(--black);
+    text-align: center;
+  }
+  .contact-inner {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .contact-inner .section-title { margin-bottom: 1rem; }
+  .contact-sub {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+  .contact-links {
+    display: flex; justify-content: center;
+    flex-wrap: wrap; gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.6rem;
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.75rem 1.4rem;
+    border: 1px solid var(--border);
+    transition: all 0.25s;
+    border-radius: 1px;
+  }
+  .contact-link:hover {
+    border-color: var(--amber);
+    color: var(--amber);
+    transform: translateY(-2px);
+  }
+  .contact-link span { font-size: 1rem; }
+
+  /* FOOTER */
+  footer {
+    background: #050505;
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .footer-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    color: #555;
+    letter-spacing: 0.08em;
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 64px; height: 2px;
+    background: var(--amber);
+    margin: 1rem 0 2.5rem;
+  }
+
+  /* AVAILABILITY BADGE */
+  .availability {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    color: #3ec97a;
+    margin-top: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.9s 1.2s forwards;
+  }
+  .availability-dot {
+    width: 7px; height: 7px;
+    background: #3ec97a;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.5); }
+  }
+
+  /* SCROLL ANIMATIONS */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    #hero { padding: 7rem 1.5rem 4rem; }
+    section { padding: 5rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero-stats { gap: 1.8rem; flex-wrap: wrap; }
+    .hero-accent { display: none; }
+    footer { padding: 1.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .publication-card { flex-direction: column; gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">SS</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-accent"></div>
+
+  <p class="hero-eyebrow">Data Scientist · Analyst · ML Engineer</p>
+  <h1 class="hero-name">Shruti<br /><em>Sharma</em></h1>
+  <p class="hero-tagline">
+    I turn raw, chaotic data into stories that drive decisions — combining statistical rigor, machine learning, and engineering depth to deliver measurable business impact.
+  </p>
+
+  <div class="availability">
+    <span class="availability-dot"></span>
+    Open to Data Science & Analytics Roles
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">6+</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">10M+</div>
+      <div class="stat-label">Records / Month</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">20%</div>
+      <div class="stat-label">QoQ Revenue Growth</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">94%</div>
+      <div class="stat-label">ML Model Accuracy</div>
+    </div>
+  </div>
+
+  <div class="hero-ctas">
+    <a href="#projects" class="btn btn-primary">View My Work →</a>
+    <a href="mailto:shrutisharma.career@gmail.com" class="btn btn-outline">Get In Touch</a>
+    <a href="https://github.com/shrutishharmacareer" target="_blank" class="btn btn-outline">GitHub ↗</a>
+  </div>
+
+  <div class="hero-scroll-hint">
+    <span class="scroll-line"></span>
+    Scroll to explore
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">// 01 — About</p>
+  <h2 class="section-title">The analyst who ships,<br /><em>not just slides.</em></h2>
+
+  <!-- Photo + bio row -->
+  <div class="about-intro animate-on-scroll">
+    <div class="photo-wrapper">
+      <div class="photo-frame">
+        <!-- ✏️ TO ADD YOUR PHOTO: Replace the div below with:
+             <img src="your-photo.jpg" alt="Shruti Sharma" style="width:100%;height:100%;object-fit:cover;" />
+        -->
+        <div class="photo-placeholder">
+          <div class="photo-icon">👩‍💻</div>
+          <div class="photo-label">Your photo<br />goes here</div>
+          <div class="photo-upload-hint">Replace with an &lt;img&gt; tag<br />when ready</div>
+        </div>
+      </div>
+      <div class="photo-shadow-box"></div>
+      <div class="photo-name-tag">
+        <strong>Shruti Sharma</strong>
+        <span>Data Scientist · ML Engineer</span>
+        <p class="photo-edu">M.S. Statistics & CS · SJSU 2023<br />San Jose, CA · Open to Remote</p>
+      </div>
+    </div>
+
+    <div class="about-text">
+      <p>I'm a <strong>Data Scientist and Analyst</strong> with a Master's in Statistics & Computer Science from San Jose State University and 6+ years building data solutions that actually move business metrics.</p>
+      <p>My edge: I combine <strong>deep statistical thinking</strong> — causal inference, time-series modeling, A/B experimentation — with the <strong>engineering muscle</strong> to build the pipelines that power those insights end-to-end.</p>
+      <p>At <strong>Iconic Artists Group</strong>, I built the analytics infrastructure from scratch — forecasting revenue, analyzing catalog performance, and directly informing marketing strategies that drove <strong>$80K+ QoQ growth</strong>. Before that, I built ML systems at TCS and IoT data pipelines at Secomind.</p>
+      <p>Now I'm pushing into <strong>Generative AI & LLM-powered data tools</strong> — building NL-to-SQL pipelines, AI agents, and self-healing query engines that make data accessible to everyone.</p>
+    </div>
+  </div>
+
+  <!-- Highlight cards -->
+  <div class="about-highlights animate-on-scroll" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem;margin-top:1rem;">
+    <div class="highlight-card">
+      <h4>📊 Analytics & Experimentation</h4>
+      <p>Causal inference, A/B testing, quasi-experiments, time-series forecasting, KPI modeling — I design experiments that produce answers, not noise.</p>
+    </div>
+    <div class="highlight-card">
+      <h4>🤖 ML & Deep Learning</h4>
+      <p>Classification, recommender systems, computer vision, NLP, XGBoost, CNNs, ResNet — built and deployed models across multiple industries.</p>
+    </div>
+    <div class="highlight-card">
+      <h4>⚡ Data Engineering at Scale</h4>
+      <p>End-to-end pipelines on Azure, Databricks, Snowflake, Spark — processing millions of records reliably and on time.</p>
+    </div>
+    <div class="highlight-card">
+      <h4>🧠 GenAI & LLM Applications</h4>
+      <p>Building AI-powered tools using OpenAI APIs, LangChain, and agentic workflows — including NL-to-SQL engines and self-healing query systems.</p>
+    </div>
+    <div class="highlight-card">
+      <h4>🎓 Research & Publication</h4>
+      <p>Published in Computers & Security (Elsevier) on darknet traffic classification using ML/DL techniques — DOI: 10.1016/j.cose.2023.103098</p>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">// 02 — Skills & Stack</p>
+  <h2 class="section-title">Tools I <em>master.</em></h2>
+  <div class="skills-grid">
+    <div class="skill-category animate-on-scroll">
+      <div class="skill-category-icon">🐍</div>
+      <h3>Languages</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">SQL (Advanced)</span>
+        <span class="skill-tag">R</span>
+        <span class="skill-tag">PostgreSQL</span>
+        <span class="skill-tag">T-SQL</span>
+        <span class="skill-tag">MATLAB</span>
+      </div>
+    </div>
+    <div class="skill-category animate-on-scroll">
+      <div class="skill-category-icon">📈</div>
+      <h3>Data Science & ML</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Scikit-learn</span>
+        <span class="skill-tag">XGBoost</span>
+        <span class="skill-tag">TensorFlow</span>
+        <span class="skill-tag">PyTorch</span>
+        <span class="skill-tag">NLP / BERT</span>
+        <span class="skill-tag">Time-Series</span>
+        <span class="skill-tag">A/B Testing</span>
+        <span class="skill-tag">Causal Inference</span>
+        <span class="skill-tag">Recommender Systems</span>
+      </div>
+    </div>
+    <div class="skill-category animate-on-scroll">
+      <div class="skill-category-icon">🧠</div>
+      <h3>GenAI & LLMs</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">OpenAI API</span>
+        <span class="skill-tag">LangChain</span>
+        <span class="skill-tag">LLM Agents</span>
+        <span class="skill-tag">RAG Pipelines</span>
+        <span class="skill-tag">Prompt Engineering</span>
+        <span class="skill-tag">NL-to-SQL</span>
+        <span class="skill-tag">Streamlit</span>
+      </div>
+    </div>
+    <div class="skill-category animate-on-scroll">
+      <div class="skill-category-icon">☁️</div>
+      <h3>Cloud & Data Engineering</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Microsoft Azure</span>
+        <span class="skill-tag">Azure Data Factory</span>
+        <span class="skill-tag">ADLS</span>
+        <span class="skill-tag">Databricks</span>
+        <span class="skill-tag">Snowflake</span>
+        <span class="skill-tag">Delta Lake</span>
+        <span class="skill-tag">AWS</span>
+        <span class="skill-tag">dbt</span>
+      </div>
+    </div>
+    <div class="skill-category animate-on-scroll">
+      <div class="skill-category-icon">⚡</div>
+      <h3>Big Data & Streaming</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Apache Spark</span>
+        <span class="skill-tag">PySpark</span>
+        <span class="skill-tag">Kafka</span>
+        <span class="skill-tag">Azure Event Hub</span>
+        <span class="skill-tag">Hadoop</span>
+        <span class="skill-tag">HDFS</span>
+      </div>
+    </div>
+    <div class="skill-category animate-on-scroll">
+      <div class="skill-category-icon">📊</div>
+      <h3>Analytics & Visualization</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Power BI</span>
+        <span class="skill-tag">Tableau</span>
+        <span class="skill-tag">Statistical Modeling</span>
+        <span class="skill-tag">Regression Analysis</span>
+        <span class="skill-tag">Clustering</span>
+        <span class="skill-tag">Revenue Modeling</span>
+      </div>
+    </div>
+    <div class="skill-category animate-on-scroll">
+      <div class="skill-category-icon">🔧</div>
+      <h3>DevOps & Infrastructure</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">Kubernetes</span>
+        <span class="skill-tag">Terraform</span>
+        <span class="skill-tag">CI/CD</span>
+        <span class="skill-tag">Azure DevOps</span>
+        <span class="skill-tag">Git / GitHub</span>
+        <span class="skill-tag">Jenkins</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <p class="section-label">// 03 — Experience</p>
+  <h2 class="section-title">Where I've <em>driven impact.</em></h2>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="timeline-company">Independent Consultant</span>
+        <span class="timeline-date">Dec 2024 – Present</span>
+      </div>
+      <h3 class="timeline-role">ML Pipelines & GenAI Engineer</h3>
+      <ul class="timeline-bullets">
+        <li>Built an end-to-end <strong>NL-to-SQL pipeline</strong> converting plain-English questions into PostgreSQL queries using LLMs, eliminating the need for SQL knowledge among business users</li>
+        <li>Designed a <strong>schema-aware prompt system</strong> that injects live DB metadata into LLM context, dramatically improving query accuracy</li>
+        <li>Implemented a <strong>self-healing SQL engine</strong> that auto-detects query failures, sends errors back to AI for correction, and retries — zero manual intervention</li>
+        <li>Built safety validation layer blocking all destructive SQL before execution; deployed on <strong>Streamlit Cloud with Neon PostgreSQL</strong>, processing 2,800+ real sales records</li>
+      </ul>
+      <div class="timeline-tags">
+        <span class="timeline-tag">OpenAI API</span>
+        <span class="timeline-tag">LangChain</span>
+        <span class="timeline-tag">PostgreSQL</span>
+        <span class="timeline-tag">Streamlit</span>
+        <span class="timeline-tag">LLM Agents</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="timeline-company">Iconic Artists Group</span>
+        <span class="timeline-date">Jul 2022 – Nov 2024</span>
+      </div>
+      <h3 class="timeline-role">Data Scientist & Analytics Engineer</h3>
+      <ul class="timeline-bullets">
+        <li>Built and automated data ingestion pipelines via ADF & Azure Functions, ingesting <strong>10M+ records/month</strong> for 20+ artists with 30% improved data availability</li>
+        <li>Implemented <strong>time-series forecasting models</strong> with rolling backtests achieving ~15% error at catalog level, directly guiding revenue planning</li>
+        <li>Analyzed audience cohorts and listening behavior to identify growth KPIs — insights that informed strategies driving <strong>~20% QoQ ($80K) revenue growth</strong></li>
+        <li>Led <strong>causal impact & quasi-experimental analyses</strong> on re-releases and marketing campaigns to quantify stream lift and listener conversion</li>
+        <li>Developed executive-facing <strong>Power BI dashboards</strong> tracking catalog performance and campaign impact to drive leadership decisions</li>
+        <li>Designed <strong>Databricks + Delta Lake + Snowflake</strong> data lakehouse with star schema models supporting analytics and ML workflows</li>
+      </ul>
+      <div class="timeline-tags">
+        <span class="timeline-tag">Python</span>
+        <span class="timeline-tag">SQL</span>
+        <span class="timeline-tag">Azure</span>
+        <span class="timeline-tag">Causal Inference</span>
+        <span class="timeline-tag">Time-Series</span>
+        <span class="timeline-tag">Power BI</span>
+        <span class="timeline-tag">Databricks</span>
+        <span class="timeline-tag">Snowflake</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="timeline-company">Secomind.ai</span>
+        <span class="timeline-date">Dec 2019 – Dec 2020</span>
+      </div>
+      <h3 class="timeline-role">Data Scientist & ML Consultant</h3>
+      <ul class="timeline-bullets">
+        <li>Led analytics engagements for U.S. clients — collaborated with cross-functional stakeholders, <strong>mentored 3 analysts</strong></li>
+        <li>Designed <strong>regression-based models to optimize incentive compensation plans</strong>, improving spend efficiency by ~15%</li>
+        <li>Automated <strong>sales goal-setting workflows</strong> using data pipelines, reducing manual effort by ~40%</li>
+        <li>Built and deployed <strong>IoT telemetry pipelines</strong> using Azure IoT Hub → Azure SQL for real-time and batch smart device data</li>
+      </ul>
+      <div class="timeline-tags">
+        <span class="timeline-tag">Python</span>
+        <span class="timeline-tag">SQL</span>
+        <span class="timeline-tag">Azure IoT Hub</span>
+        <span class="timeline-tag">Regression Models</span>
+        <span class="timeline-tag">ETL</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="timeline-company">Tata Consultancy Services</span>
+        <span class="timeline-date">Sep 2018 – Dec 2019</span>
+      </div>
+      <h3 class="timeline-role">Data Scientist</h3>
+      <ul class="timeline-bullets">
+        <li>Built <strong>customer segmentation, recommendation, and predictive models</strong> on transaction, clickstream, and demographic data to personalize experiences</li>
+        <li>Developed an <strong>XGBoost-powered bug triage system at 94% accuracy</strong>, improving issue resolution efficiency by 40%</li>
+        <li>Designed and evaluated <strong>A/B experiments and dashboards</strong> to quantify lift from personalized offers, translating results into actionable strategies</li>
+        <li>Integrated systems via <strong>REST APIs</strong>, delivering a notable annual cost reduction of 3%</li>
+      </ul>
+      <div class="timeline-tags">
+        <span class="timeline-tag">Python</span>
+        <span class="timeline-tag">XGBoost</span>
+        <span class="timeline-tag">A/B Testing</span>
+        <span class="timeline-tag">Customer Analytics</span>
+        <span class="timeline-tag">Power BI</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">// 04 — Projects & Research</p>
+  <h2 class="section-title">Work that <em>speaks louder</em><br />than a résumé.</h2>
+
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-type">🤖 GenAI · LLM · Agentic AI</div>
+      <h3 class="project-title">NL-to-SQL AI Agent with Self-Healing Engine</h3>
+      <p class="project-desc">Built a production-grade pipeline that converts natural language into PostgreSQL queries using LLMs. Features a self-healing loop that detects errors, sends them back to AI for correction, and re-executes automatically.</p>
+      <div class="project-impact">⚡ Processes 2,800+ real sales records · Zero destructive SQL — safety layer enforced · Deployed live on Streamlit Cloud + Neon PostgreSQL</div>
+      <div class="project-stack">
+        <span class="stack-tag">OpenAI API</span>
+        <span class="stack-tag">LangChain</span>
+        <span class="stack-tag">PostgreSQL</span>
+        <span class="stack-tag">Streamlit</span>
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">Neon DB</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/shrutishharmacareer/nl-to-sql-pipeline" target="_blank" class="project-link">GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-type">📡 Research · ML · Cybersecurity</div>
+      <h3 class="project-title">Darknet Traffic Classification & Adversarial Attacks</h3>
+      <p class="project-desc">Published research evaluating ML and deep learning techniques to classify darknet traffic and underlying application types, including adversarial robustness analysis.</p>
+      <div class="project-impact">📄 Published in Computers & Security (Elsevier, 2023) · DOI: 10.1016/j.cose.2023.103098</div>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">Deep Learning</span>
+        <span class="stack-tag">ML Classification</span>
+        <span class="stack-tag">Traffic Analysis</span>
+      </div>
+      <div class="project-links">
+        <a href="https://doi.org/10.1016/j.cose.2023.103098" target="_blank" class="project-link">Read Paper →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-type">🚗 Deep Learning · Computer Vision</div>
+      <h3 class="project-title">NVIDIA Self-Driving Car — Steering Angle Prediction</h3>
+      <p class="project-desc">Built a deep learning model to predict the steering wheel angle for autonomous vehicles using sensor camera images. Implemented and compared CNN, VGG, and ResNet architectures.</p>
+      <div class="project-impact">🎯 Optimized log loss across architectures · ResNet and VGG benchmarked against baseline CNN</div>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">CNN</span>
+        <span class="stack-tag">VGG</span>
+        <span class="stack-tag">ResNet</span>
+        <span class="stack-tag">TensorFlow</span>
+        <span class="stack-tag">Computer Vision</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/shrutishharmacareer/self-driving-car" target="_blank" class="project-link">GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-type">🏥 Computer Vision · Medical Research</div>
+      <h3 class="project-title">Thymic Cancer Classification from Pathology Images</h3>
+      <p class="project-desc">Research-oriented project classifying thymic cancerous cells into distinct cancer types from whole slide pathology images using dimensionality reduction and ML classification.</p>
+      <div class="project-impact">🔬 Used py_wsi + HistoQC for pathology image processing · SVD for dimensionality reduction · SVM classification on Azure</div>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">py_wsi</span>
+        <span class="stack-tag">HistoQC</span>
+        <span class="stack-tag">SVD</span>
+        <span class="stack-tag">SVM</span>
+        <span class="stack-tag">Azure</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/shrutishharmacareer/Digital-Image-Pathology-Research" target="_blank" class="project-link">GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-type">✈️ Recommender Systems · Graph ML</div>
+      <h3 class="project-title">Personalized Travel Duration Recommender</h3>
+      <p class="project-desc">Reproduced and enhanced research on personalized travel recommender systems, experimenting with graph representation learning (DeepWalk) and advanced techniques to outperform baseline methods.</p>
+      <div class="project-impact">📈 Improved over baseline Dietz & Aggarwal results · Graph embeddings via DeepWalk for itinerary optimization</div>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">DeepWalk</span>
+        <span class="stack-tag">NumPy</span>
+        <span class="stack-tag">Pandas</span>
+        <span class="stack-tag">Statistical Analysis</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/shrutishharmacareer" target="_blank" class="project-link">GitHub →</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-type">🎵 Analytics · Causal Inference · Business Impact</div>
+      <h3 class="project-title">Music Catalog Revenue Analytics Platform</h3>
+      <p class="project-desc">End-to-end analytics infrastructure for a music label managing 20+ artists — from data ingestion to executive dashboards, powering pricing, promotion, and release decisions.</p>
+      <div class="project-impact">💰 ~20% QoQ revenue growth ($80K+) attributed to insights · Time-series forecasting at ~15% catalog-level error</div>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">SQL</span>
+        <span class="stack-tag">Azure ADF</span>
+        <span class="stack-tag">Power BI</span>
+        <span class="stack-tag">Causal Inference</span>
+        <span class="stack-tag">Databricks</span>
+      </div>
+      <div class="project-links">
+        <a href="https://www.linkedin.com/in/shrutisharma09/" target="_blank" class="project-link">LinkedIn →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <p class="section-label" style="text-align:center">// 05 — Let's Connect</p>
+    <h2 class="section-title animate-on-scroll">Ready to make<br /><em>data work harder.</em></h2>
+    <div class="divider" style="margin: 0 auto 2rem;"></div>
+    <p class="contact-sub animate-on-scroll">
+      I'm actively exploring Data Science, Analytics, and ML Engineering roles where I can drive measurable impact. If you're building something ambitious, let's talk.
+    </p>
+    <div class="contact-links animate-on-scroll">
+      <a href="mailto:shrutisharma.career@gmail.com" class="contact-link">
+        <span>✉️</span> shrutisharma.career@gmail.com
+      </a>
+      <a href="https://www.linkedin.com/in/shrutisharma09/" target="_blank" class="contact-link">
+        <span>💼</span> LinkedIn
+      </a>
+      <a href="https://github.com/shrutishharmacareer" target="_blank" class="contact-link">
+        <span>🐙</span> GitHub
+      </a>
+      <a href="tel:4083342461" class="contact-link">
+        <span>📞</span> 408-334-2461
+      </a>
+    </div>
+    <p class="animate-on-scroll" style="color: var(--muted); font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em;">
+      📍 San Jose, CA · Open to Remote & Hybrid
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-name">Shruti Sharma · Data Scientist & Analyst</div>
+  <div class="footer-note">Built with passion · San Jose, CA · 2025</div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  function animCursor() {
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animCursor);
+  }
+  animCursor();
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => { ring.style.transform = 'translate(-50%, -50%) scale(1.8)'; ring.style.borderColor = 'var(--amber)'; ring.style.opacity = '0.8'; });
+    el.addEventListener('mouseleave', () => { ring.style.transform = 'translate(-50%, -50%) scale(1)'; ring.style.borderColor = 'var(--amber)'; ring.style.opacity = '0.5'; });
+  });
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.animate-on-scroll, .timeline-item, .project-card').forEach(el => observer.observe(el));
+
+  // Staggered project cards
+  document.querySelectorAll('.project-card').forEach((card, i) => {
+    card.style.transitionDelay = (i * 0.1) + 's';
+  });
+
+  // Staggered timeline items
+  document.querySelectorAll('.timeline-item').forEach((item, i) => {
+    item.style.transitionDelay = (i * 0.15) + 's';
+  });
+</script>
+</body>
+</html>
