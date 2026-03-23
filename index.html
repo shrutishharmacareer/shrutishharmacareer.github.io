@@ -3,790 +3,198 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Shruti Sharma — Data Scientist & Analyst</title>
+<title>Shruti Sharma — Data Scientist, Analyst & AI/ML Engineer</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet" />
 <style>
   :root {
     --black: #0a0a0a;
     --cream: #f5f0e8;
     --amber: #e8a020;
-    --rust: #c44b2a;
-    --sage: #3d6b5c;
     --muted: #9a9080;
-    --white: #fefefe;
     --card-bg: #111111;
     --border: rgba(232,160,32,0.2);
+    --col1: #e8a020;   /* amber  — Data Engineering */
+    --col2: #3ec97a;   /* green  — Data Science & Analytics */
+    --col3: #8b7fff;   /* violet — ML / AI / GenAI */
   }
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--cream); font-family: 'Syne', sans-serif; overflow-x: hidden; cursor: none; }
 
-  body {
-    background: var(--black);
-    color: var(--cream);
-    font-family: 'Syne', sans-serif;
-    overflow-x: hidden;
-    cursor: none;
-  }
-
-  /* Custom cursor */
-  .cursor {
-    width: 10px; height: 10px;
-    background: var(--amber);
-    border-radius: 50%;
-    position: fixed; top: 0; left: 0;
-    pointer-events: none; z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s ease;
-  }
-  .cursor-ring {
-    width: 36px; height: 36px;
-    border: 1px solid var(--amber);
-    border-radius: 50%;
-    position: fixed; top: 0; left: 0;
-    pointer-events: none; z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: all 0.15s ease;
-    opacity: 0.5;
-  }
+  /* CURSOR */
+  .cursor { width:10px;height:10px;background:var(--amber);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%); }
+  .cursor-ring { width:36px;height:36px;border:1px solid var(--amber);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .15s;opacity:.5; }
 
   /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.4rem 4rem;
-    background: rgba(10,10,10,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    color: var(--amber);
-    letter-spacing: 0.02em;
-  }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 0.78rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--amber); }
+  nav { position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 4rem;background:rgba(10,10,10,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border); }
+  .nav-logo { font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--amber); }
+  .nav-links { display:flex;gap:2.2rem;list-style:none; }
+  .nav-links a { color:var(--muted);text-decoration:none;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;transition:color .2s; }
+  .nav-links a:hover { color:var(--amber); }
 
   /* HERO */
-  #hero {
-    min-height: 100vh;
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 8rem 4rem 4rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-grid-bg {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(232,160,32,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(232,160,32,0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
-    animation: gridDrift 30s linear infinite;
-  }
-  @keyframes gridDrift {
-    0% { background-position: 0 0; }
-    100% { background-position: 60px 60px; }
-  }
-  .hero-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.25em;
-    color: var(--amber);
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 0.8s 0.2s forwards;
-  }
-  .hero-name {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(4rem, 10vw, 9rem);
-    font-weight: 900;
-    line-height: 0.92;
-    letter-spacing: -0.02em;
-    opacity: 0;
-    animation: fadeUp 0.9s 0.4s forwards;
-  }
-  .hero-name em {
-    font-style: italic;
-    color: var(--amber);
-  }
-  .hero-tagline {
-    margin-top: 2rem;
-    font-size: clamp(1rem, 2.2vw, 1.35rem);
-    color: var(--muted);
-    max-width: 580px;
-    line-height: 1.6;
-    font-weight: 400;
-    opacity: 0;
-    animation: fadeUp 0.9s 0.6s forwards;
-  }
-  .hero-stats {
-    display: flex; gap: 3rem;
-    margin-top: 3.5rem;
-    opacity: 0;
-    animation: fadeUp 0.9s 0.8s forwards;
-  }
-  .stat-item { }
-  .stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.6rem;
-    font-weight: 700;
-    color: var(--amber);
-    line-height: 1;
-  }
-  .stat-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-top: 0.3rem;
-  }
-  .hero-ctas {
-    display: flex; gap: 1.2rem; flex-wrap: wrap;
-    margin-top: 3rem;
-    opacity: 0;
-    animation: fadeUp 0.9s 1s forwards;
-  }
-  .btn {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    padding: 0.85rem 2rem;
-    font-family: 'Syne', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border: none;
-    cursor: none;
-    transition: all 0.25s;
-  }
-  .btn-primary {
-    background: var(--amber);
-    color: var(--black);
-  }
-  .btn-primary:hover { background: var(--cream); transform: translateY(-2px); }
-  .btn-outline {
-    background: transparent;
-    color: var(--cream);
-    border: 1px solid rgba(245,240,232,0.25);
-  }
-  .btn-outline:hover { border-color: var(--amber); color: var(--amber); transform: translateY(-2px); }
-
-  .hero-scroll-hint {
-    position: absolute; bottom: 2.5rem; left: 4rem;
-    display: flex; align-items: center; gap: 0.8rem;
-    color: var(--muted);
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    opacity: 0;
-    animation: fadeUp 0.9s 1.4s forwards;
-  }
-  .scroll-line {
-    width: 48px; height: 1px;
-    background: var(--amber);
-    animation: lineGrow 2s 1.6s ease-out forwards;
-    transform-origin: left;
-    transform: scaleX(0);
-  }
-  @keyframes lineGrow { to { transform: scaleX(1); } }
-
-  .hero-accent {
-    position: absolute;
-    right: -60px; top: 50%;
-    transform: translateY(-50%);
-    width: min(500px, 45vw);
-    height: min(500px, 45vw);
-    border-radius: 50%;
-    background: radial-gradient(circle at 40% 40%, rgba(232,160,32,0.12), transparent 70%);
-    pointer-events: none;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(28px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  #hero { min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:8rem 4rem 4rem;position:relative;overflow:hidden; }
+  .hero-grid-bg { position:absolute;inset:0;background-image:linear-gradient(rgba(232,160,32,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(232,160,32,.04) 1px,transparent 1px);background-size:60px 60px;animation:gridDrift 30s linear infinite; }
+  @keyframes gridDrift { 100% { background-position:60px 60px; } }
+  .hero-accent { position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:min(520px,44vw);height:min(520px,44vw);border-radius:50%;background:radial-gradient(circle at 40% 40%,rgba(232,160,32,.1),transparent 70%);pointer-events:none; }
+  .hero-eyebrow { font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.25em;color:var(--amber);text-transform:uppercase;margin-bottom:1.4rem;opacity:0;animation:fadeUp .8s .2s forwards; }
+  .hero-name { font-family:'Playfair Display',serif;font-size:clamp(3.8rem,10vw,9rem);font-weight:900;line-height:.92;letter-spacing:-.02em;opacity:0;animation:fadeUp .9s .4s forwards; }
+  .hero-name em { font-style:italic;color:var(--amber); }
+  .hero-tagline { margin-top:1.8rem;font-size:clamp(1rem,2vw,1.3rem);color:var(--muted);max-width:640px;line-height:1.7;opacity:0;animation:fadeUp .9s .6s forwards; }
+  .availability { display:inline-flex;align-items:center;gap:.5rem;font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.1em;color:#3ec97a;margin-top:1.8rem;opacity:0;animation:fadeUp .9s .75s forwards; }
+  .availability-dot { width:7px;height:7px;background:#3ec97a;border-radius:50%;animation:pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.5)} }
+  .hero-stats { display:flex;gap:2.8rem;flex-wrap:wrap;margin-top:2.8rem;opacity:0;animation:fadeUp .9s .85s forwards; }
+  .stat-num { font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:700;color:var(--amber);line-height:1; }
+  .stat-label { font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:.25rem; }
+  .hero-ctas { display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:2.8rem;opacity:0;animation:fadeUp .9s 1s forwards; }
+  .btn { display:inline-flex;align-items:center;gap:.5rem;padding:.82rem 1.9rem;font-family:'Syne',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:none;cursor:none;transition:all .25s; }
+  .btn-primary { background:var(--amber);color:var(--black); }
+  .btn-primary:hover { background:var(--cream);transform:translateY(-2px); }
+  .btn-outline { background:transparent;color:var(--cream);border:1px solid rgba(245,240,232,.22); }
+  .btn-outline:hover { border-color:var(--amber);color:var(--amber);transform:translateY(-2px); }
+  .hero-scroll-hint { position:absolute;bottom:2.5rem;left:4rem;display:flex;align-items:center;gap:.8rem;color:var(--muted);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;opacity:0;animation:fadeUp .9s 1.3s forwards; }
+  .scroll-line { width:48px;height:1px;background:var(--amber);transform:scaleX(0);transform-origin:left;animation:lineGrow 2s 1.6s ease-out forwards; }
+  @keyframes lineGrow { to { transform:scaleX(1); } }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
 
   /* SECTION COMMONS */
-  section { padding: 7rem 4rem; }
-  .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--amber);
-    margin-bottom: 1rem;
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.2rem, 5vw, 3.5rem);
-    font-weight: 700;
-    line-height: 1.1;
-    margin-bottom: 3.5rem;
-  }
-  .section-title em { font-style: italic; color: var(--amber); }
+  section { padding:7rem 4rem; }
+  .section-label { font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:var(--amber);margin-bottom:1rem; }
+  .section-title { font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.4rem);font-weight:700;line-height:1.1;margin-bottom:3rem; }
+  .section-title em { font-style:italic;color:var(--amber); }
+  .animate-on-scroll { opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s; }
+  .animate-on-scroll.visible { opacity:1;transform:translateY(0); }
 
   /* ABOUT */
-  #about { background: var(--black); }
+  #about { background:var(--black); }
+  .about-text p { color:#b0a898;font-size:1.02rem;line-height:1.9;margin-bottom:1.3rem; }
+  .about-text strong { color:var(--cream); }
+  .about-chips { display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2rem; }
+  .about-chip { font-family:'DM Mono',monospace;font-size:.68rem;padding:.35rem .8rem;border:1px solid var(--border);color:var(--muted);border-radius:1px; }
 
-  /* Photo + intro row */
-  .about-intro {
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    gap: 4rem;
-    align-items: start;
-    margin-bottom: 4rem;
-  }
-  .photo-wrapper {
-    position: relative;
-    flex-shrink: 0;
-  }
-  .photo-frame {
-    width: 260px;
-    height: 320px;
-    position: relative;
-    border: 1px solid var(--border);
-  }
-  /* Decorative corner accents */
-  .photo-frame::before, .photo-frame::after {
-    content: '';
-    position: absolute;
-    width: 24px; height: 24px;
-    border-color: var(--amber);
-    border-style: solid;
-  }
-  .photo-frame::before {
-    top: -6px; left: -6px;
-    border-width: 2px 0 0 2px;
-  }
-  .photo-frame::after {
-    bottom: -6px; right: -6px;
-    border-width: 0 2px 2px 0;
-  }
-  .photo-placeholder {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(145deg, #1a1612 0%, #111 60%, #181410 100%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  .photo-placeholder:hover { background: linear-gradient(145deg, #201a14 0%, #151515 60%, #1e1710 100%); }
-  /* Subtle noise texture overlay */
-  .photo-placeholder::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    background-size: 200px 200px;
-    opacity: 0.4;
-    pointer-events: none;
-  }
-  .photo-icon {
-    width: 72px; height: 72px;
-    border-radius: 50%;
-    background: rgba(232,160,32,0.1);
-    border: 1px dashed rgba(232,160,32,0.4);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.8rem;
-    animation: breathe 3s ease-in-out infinite;
-  }
-  @keyframes breathe {
-    0%, 100% { transform: scale(1); opacity: 0.8; }
-    50% { transform: scale(1.05); opacity: 1; }
-  }
-  .photo-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(232,160,32,0.5);
-    text-align: center;
-    line-height: 1.6;
-  }
-  .photo-upload-hint {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    color: rgba(154,144,128,0.4);
-    letter-spacing: 0.1em;
-    text-align: center;
-    padding: 0 1rem;
-  }
-  /* Decorative offset box behind photo */
-  .photo-shadow-box {
-    position: absolute;
-    top: 12px; left: 12px;
-    width: 260px; height: 320px;
-    border: 1px solid rgba(232,160,32,0.12);
-    z-index: -1;
-  }
-  .photo-name-tag {
-    margin-top: 1.2rem;
-    text-align: center;
-  }
-  .photo-name-tag strong {
-    display: block;
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--cream);
-  }
-  .photo-name-tag span {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    color: var(--amber);
-    text-transform: uppercase;
-  }
-  .photo-edu {
-    margin-top: 0.6rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    color: var(--muted);
-    letter-spacing: 0.06em;
-    line-height: 1.6;
-    text-align: center;
-  }
-
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
-    align-items: start;
-  }
-  .about-text p {
-    color: #b0a898;
-    font-size: 1.05rem;
-    line-height: 1.85;
-    margin-bottom: 1.4rem;
-    font-weight: 400;
-  }
-  .about-text strong { color: var(--cream); }
-
-  @media (max-width: 768px) {
-    .about-intro { grid-template-columns: 1fr; gap: 2rem; }
-    .photo-frame, .photo-shadow-box { width: 200px; height: 240px; }
-    .photo-wrapper { display: flex; flex-direction: column; align-items: center; }
-  }
-  .about-highlights {
-    display: flex; flex-direction: column; gap: 1.2rem;
-  }
-  .highlight-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    padding: 1.4rem 1.6rem;
-    border-radius: 2px;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.25s, transform 0.25s;
-  }
-  .highlight-card::before {
-    content: '';
-    position: absolute; left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: var(--amber);
-  }
-  .highlight-card:hover { border-color: var(--amber); transform: translateX(4px); }
-  .highlight-card h4 {
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--amber);
-    margin-bottom: 0.35rem;
-  }
-  .highlight-card p {
-    font-size: 0.88rem;
-    color: var(--muted);
-    line-height: 1.5;
-    font-family: 'DM Mono', monospace;
-  }
-
-  /* SKILLS */
-  #skills { background: #0d0d0d; }
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-  }
-  .skill-category {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    padding: 1.8rem;
-    border-radius: 2px;
-    transition: border-color 0.25s, transform 0.3s;
-  }
-  .skill-category:hover { border-color: var(--amber); transform: translateY(-4px); }
-  .skill-category-icon {
-    font-size: 1.5rem;
-    margin-bottom: 0.8rem;
-  }
-  .skill-category h3 {
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--amber);
-    margin-bottom: 1rem;
-  }
-  .skill-tags {
-    display: flex; flex-wrap: wrap; gap: 0.5rem;
-  }
-  .skill-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    padding: 0.3rem 0.65rem;
-    background: rgba(232,160,32,0.08);
-    border: 1px solid rgba(232,160,32,0.15);
-    color: #c8bfa8;
-    border-radius: 1px;
-    letter-spacing: 0.05em;
-  }
+  /* THREE PILLARS */
+  #pillars { background:#0d0d0d; }
+  .pillars-grid { display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border); }
+  .pillar { padding:2.8rem 2.2rem;border-right:1px solid var(--border);transition:background .3s; }
+  .pillar:last-child { border-right:none; }
+  .pillar:hover { background:rgba(255,255,255,.015); }
+  .pillar-bar { height:3px;width:100%;margin-bottom:2rem; }
+  .p1 .pillar-bar { background:var(--col1); }
+  .p2 .pillar-bar { background:var(--col2); }
+  .p3 .pillar-bar { background:var(--col3); }
+  .pillar-num { font-family:'DM Mono',monospace;font-size:.63rem;letter-spacing:.2em;color:var(--muted);margin-bottom:.6rem; }
+  .pillar-title { font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;line-height:1.2;margin-bottom:.4rem; }
+  .p1 .pillar-title { color:var(--col1); }
+  .p2 .pillar-title { color:var(--col2); }
+  .p3 .pillar-title { color:var(--col3); }
+  .pillar-sub { font-family:'DM Mono',monospace;font-size:.67rem;color:var(--muted);letter-spacing:.05em;margin-bottom:1.6rem;line-height:1.5; }
+  .pillar-skills { display:flex;flex-wrap:wrap;gap:.38rem;margin-bottom:1.8rem; }
+  .ptag { font-family:'DM Mono',monospace;font-size:.62rem;padding:.22rem .52rem;border-radius:1px;letter-spacing:.04em; }
+  .p1 .ptag { background:rgba(232,160,32,.08);border:1px solid rgba(232,160,32,.2);color:#c8a870; }
+  .p2 .ptag { background:rgba(62,201,122,.07);border:1px solid rgba(62,201,122,.2);color:#7db8a4; }
+  .p3 .ptag { background:rgba(139,127,255,.07);border:1px solid rgba(139,127,255,.2);color:#a89fff; }
+  .pdivider { height:1px;background:var(--border);margin:1.5rem 0; }
+  .p-proj-label { font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem; }
+  .mp { margin-bottom:1.4rem;padding-bottom:1.4rem;border-bottom:1px solid rgba(255,255,255,.05); }
+  .mp:last-child { border-bottom:none;margin-bottom:0;padding-bottom:0; }
+  .mp-title { font-size:.9rem;font-weight:700;color:var(--cream);margin-bottom:.3rem; }
+  .mp-desc { font-size:.79rem;color:var(--muted);line-height:1.58;margin-bottom:.45rem; }
+  .mp-impact { font-family:'DM Mono',monospace;font-size:.7rem;line-height:1.45;margin-bottom:.45rem; }
+  .p1 .mp-impact { color:var(--col1); }
+  .p2 .mp-impact { color:var(--col2); }
+  .p3 .mp-impact { color:var(--col3); }
+  .mp-links { display:flex;gap:1rem;flex-wrap:wrap; }
+  .mp-link { font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.08em;text-decoration:none;display:inline-flex;align-items:center;gap:.3rem;transition:gap .2s; }
+  .p1 .mp-link { color:var(--col1); }
+  .p2 .mp-link { color:var(--col2); }
+  .p3 .mp-link { color:var(--col3); }
+  .mp-link:hover { gap:.6rem; }
 
   /* EXPERIENCE */
-  #experience { background: var(--black); }
-  .timeline {
-    position: relative;
-    padding-left: 2rem;
-  }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 1px;
-    background: linear-gradient(to bottom, var(--amber), transparent);
-  }
-  .timeline-item {
-    position: relative;
-    padding: 0 0 3.5rem 2.5rem;
-    opacity: 0;
-    transform: translateX(-16px);
-    transition: opacity 0.6s, transform 0.6s;
-  }
-  .timeline-item.visible { opacity: 1; transform: translateX(0); }
-  .timeline-dot {
-    position: absolute;
-    left: -6px; top: 6px;
-    width: 12px; height: 12px;
-    background: var(--amber);
-    border-radius: 50%;
-    border: 2px solid var(--black);
-  }
-  .timeline-meta {
-    display: flex; align-items: center; gap: 1rem;
-    margin-bottom: 0.5rem;
-    flex-wrap: wrap;
-  }
-  .timeline-date {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-  }
-  .timeline-company {
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--amber);
-    padding: 0.15rem 0.6rem;
-    border: 1px solid var(--amber);
-    border-radius: 1px;
-  }
-  .timeline-role {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-bottom: 0.9rem;
-  }
-  .timeline-bullets {
-    list-style: none;
-    display: flex; flex-direction: column; gap: 0.55rem;
-  }
-  .timeline-bullets li {
-    font-size: 0.9rem;
-    color: #a09880;
-    line-height: 1.6;
-    padding-left: 1.2rem;
-    position: relative;
-  }
-  .timeline-bullets li::before {
-    content: '→';
-    position: absolute; left: 0;
-    color: var(--amber);
-    font-size: 0.75rem;
-  }
-  .timeline-bullets li strong { color: var(--cream); }
-  .timeline-tags {
-    display: flex; flex-wrap: wrap; gap: 0.4rem;
-    margin-top: 0.9rem;
-  }
-  .timeline-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    padding: 0.2rem 0.55rem;
-    background: rgba(61,107,92,0.2);
-    color: #7db8a4;
-    border: 1px solid rgba(61,107,92,0.4);
-    border-radius: 1px;
-  }
+  #experience { background:var(--black); }
+  .timeline { position:relative;padding-left:2rem; }
+  .timeline::before { content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--amber),transparent); }
+  .timeline-item { position:relative;padding:0 0 3.5rem 2.5rem;opacity:0;transform:translateX(-16px);transition:opacity .6s,transform .6s; }
+  .timeline-item.visible { opacity:1;transform:translateX(0); }
+  .tdot { position:absolute;left:-6px;top:6px;width:12px;height:12px;background:var(--amber);border-radius:50%;border:2px solid var(--black); }
+  .tmeta { display:flex;align-items:center;gap:1rem;margin-bottom:.5rem;flex-wrap:wrap; }
+  .tdate { font-family:'DM Mono',monospace;font-size:.67rem;color:var(--muted);letter-spacing:.1em; }
+  .tco { font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);padding:.15rem .6rem;border:1px solid var(--amber);border-radius:1px; }
+  .tloc { font-family:'DM Mono',monospace;font-size:.63rem;color:var(--muted);letter-spacing:.06em; }
+  .trole { font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;margin-bottom:.4rem; }
+  .trole-context { font-family:'DM Mono',monospace;font-size:.7rem;color:var(--muted);margin-bottom:.9rem;letter-spacing:.04em;line-height:1.5; }
+  .tcols { display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:.9rem; }
+  .tclabel { font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem; }
+  .tclabel.e { color:var(--col1); } .tclabel.s { color:var(--col2); } .tclabel.a { color:var(--col3); }
+  .tproj { margin-bottom:1.4rem;padding:1.1rem 1.2rem;background:rgba(255,255,255,.025);border-left:2px solid rgba(232,160,32,.2);border-radius:1px; }
+  .tproj:last-of-type { margin-bottom:.9rem; }
+  .tproj-title { margin-bottom:.6rem; }
+  .tbullets { list-style:none;display:flex;flex-direction:column;gap:.5rem; }
+  .tbullets li { font-size:.86rem;color:#a09880;line-height:1.65;padding-left:1.2rem;position:relative; }
+  .tbullets li::before { content:'→';position:absolute;left:0;color:var(--amber);font-size:.72rem; }
+  .tbullets li strong { color:var(--cream); }
+  .ttags { display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.9rem; }
+  .ttag { font-family:'DM Mono',monospace;font-size:.62rem;padding:.18rem .48rem;background:rgba(61,107,92,.18);color:#7db8a4;border:1px solid rgba(61,107,92,.32);border-radius:1px; }
 
   /* PROJECTS */
-  #projects { background: #0d0d0d; }
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 1.8rem;
-  }
-  .project-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    padding: 2rem;
-    border-radius: 2px;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.3s, transform 0.3s;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s, transform 0.5s, border-color 0.3s;
-  }
-  .project-card.visible { opacity: 1; transform: translateY(0); }
-  .project-card:hover { border-color: var(--amber); transform: translateY(-6px); }
-  .project-card::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--amber), var(--rust));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s;
-  }
-  .project-card:hover::after { transform: scaleX(1); }
-  .project-type {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--amber);
-    margin-bottom: 0.8rem;
-  }
-  .project-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.35rem;
-    font-weight: 700;
-    margin-bottom: 0.8rem;
-    line-height: 1.3;
-  }
-  .project-desc {
-    font-size: 0.88rem;
-    color: #998f80;
-    line-height: 1.65;
-    margin-bottom: 1.2rem;
-  }
-  .project-impact {
-    background: rgba(232,160,32,0.06);
-    border-left: 2px solid var(--amber);
-    padding: 0.6rem 0.9rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--amber);
-    margin-bottom: 1.2rem;
-    line-height: 1.5;
-  }
-  .project-stack {
-    display: flex; flex-wrap: wrap; gap: 0.4rem;
-    margin-bottom: 1.2rem;
-  }
-  .stack-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    padding: 0.2rem 0.55rem;
-    background: rgba(232,160,32,0.07);
-    border: 1px solid rgba(232,160,32,0.15);
-    color: #b0a898;
-    border-radius: 1px;
-  }
-  .project-links { display: flex; gap: 1rem; }
-  .project-link {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--amber);
-    text-decoration: none;
-    display: flex; align-items: center; gap: 0.3rem;
-    transition: gap 0.2s;
-  }
-  .project-link:hover { gap: 0.6rem; }
-
-  /* PUBLICATION */
-  .publication-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    padding: 1.8rem 2rem;
-    border-radius: 2px;
-    margin-bottom: 1rem;
-    display: flex; gap: 2rem; align-items: flex-start;
-    transition: border-color 0.25s;
-  }
-  .publication-card:hover { border-color: var(--amber); }
-  .pub-icon {
-    font-size: 1.8rem;
-    flex-shrink: 0;
-    margin-top: 0.2rem;
-  }
-  .pub-content h4 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    margin-bottom: 0.4rem;
-  }
-  .pub-content p {
-    font-size: 0.85rem;
-    color: var(--muted);
-    line-height: 1.5;
-    margin-bottom: 0.6rem;
-  }
-  .pub-link {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    color: var(--amber);
-    text-decoration: none;
-    letter-spacing: 0.08em;
-  }
-  .pub-link:hover { text-decoration: underline; }
+  #projects { background:#0d0d0d; }
+  .pfilter { display:flex;gap:.7rem;flex-wrap:wrap;margin-bottom:2.5rem; }
+  .fbtn { font-family:'DM Mono',monospace;font-size:.67rem;padding:.38rem 1rem;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:none;letter-spacing:.1em;text-transform:uppercase;transition:all .2s; }
+  .fbtn.active,.fbtn:hover { color:var(--black);background:var(--amber);border-color:var(--amber); }
+  .pgrid { display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.6rem; }
+  .pcard { background:var(--card-bg);border:1px solid var(--border);padding:1.8rem;position:relative;overflow:hidden;opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s,border-color .3s; }
+  .pcard.visible { opacity:1;transform:translateY(0); }
+  .pcard:hover { transform:translateY(-5px); }
+  .pcard::after { content:'';position:absolute;top:0;left:0;right:0;height:2px;transform:scaleX(0);transform-origin:left;transition:transform .3s; }
+  .pcard.eng::after { background:var(--col1); } .pcard.sci::after { background:var(--col2); } .pcard.ai::after { background:var(--col3); }
+  .pcard:hover::after { transform:scaleX(1); }
+  .pcard.eng:hover { border-color:rgba(232,160,32,.45); }
+  .pcard.sci:hover { border-color:rgba(62,201,122,.45); }
+  .pcard.ai:hover  { border-color:rgba(139,127,255,.45); }
+  .pbadge { display:inline-block;font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;padding:.2rem .58rem;border-radius:1px;margin-bottom:.8rem; }
+  .pcard.eng .pbadge { background:rgba(232,160,32,.1);color:var(--col1);border:1px solid rgba(232,160,32,.25); }
+  .pcard.sci .pbadge { background:rgba(62,201,122,.1);color:var(--col2);border:1px solid rgba(62,201,122,.25); }
+  .pcard.ai  .pbadge { background:rgba(139,127,255,.1);color:var(--col3);border:1px solid rgba(139,127,255,.25); }
+  .ptitle { font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin-bottom:.65rem;line-height:1.3; }
+  .pdesc { font-size:.84rem;color:#998f80;line-height:1.62;margin-bottom:.9rem; }
+  .pimpact { font-family:'DM Mono',monospace;font-size:.7rem;padding:.5rem .75rem;margin-bottom:.9rem;border-left:2px solid;line-height:1.5; }
+  .pcard.eng .pimpact { color:var(--col1);border-color:var(--col1);background:rgba(232,160,32,.05); }
+  .pcard.sci .pimpact { color:var(--col2);border-color:var(--col2);background:rgba(62,201,122,.05); }
+  .pcard.ai  .pimpact { color:var(--col3);border-color:var(--col3);background:rgba(139,127,255,.05); }
+  .pstack { display:flex;flex-wrap:wrap;gap:.32rem;margin-bottom:.9rem; }
+  .stag { font-family:'DM Mono',monospace;font-size:.6rem;padding:.18rem .48rem;background:rgba(232,160,32,.06);border:1px solid rgba(232,160,32,.12);color:#b0a898;border-radius:1px; }
+  .plinks { display:flex;gap:1rem;flex-wrap:wrap; }
+  .plink { font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;gap:.3rem;transition:gap .2s;color:var(--amber); }
+  .plink:hover { gap:.6rem; }
 
   /* CONTACT */
-  #contact {
-    background: var(--black);
-    text-align: center;
-  }
-  .contact-inner {
-    max-width: 640px;
-    margin: 0 auto;
-  }
-  .contact-inner .section-title { margin-bottom: 1rem; }
-  .contact-sub {
-    color: var(--muted);
-    font-size: 1rem;
-    line-height: 1.7;
-    margin-bottom: 2.5rem;
-  }
-  .contact-links {
-    display: flex; justify-content: center;
-    flex-wrap: wrap; gap: 1.5rem;
-    margin-bottom: 2rem;
-  }
-  .contact-link {
-    display: flex; align-items: center; gap: 0.6rem;
-    color: var(--cream);
-    text-decoration: none;
-    font-size: 0.88rem;
-    padding: 0.75rem 1.4rem;
-    border: 1px solid var(--border);
-    transition: all 0.25s;
-    border-radius: 1px;
-  }
-  .contact-link:hover {
-    border-color: var(--amber);
-    color: var(--amber);
-    transform: translateY(-2px);
-  }
-  .contact-link span { font-size: 1rem; }
+  #contact { background:var(--black);text-align:center; }
+  .ci { max-width:640px;margin:0 auto; }
+  .csub { color:var(--muted);font-size:1rem;line-height:1.7;margin-bottom:2.5rem; }
+  .clinks { display:flex;justify-content:center;flex-wrap:wrap;gap:1.2rem;margin-bottom:2rem; }
+  .clink { display:flex;align-items:center;gap:.6rem;color:var(--cream);text-decoration:none;font-size:.84rem;padding:.7rem 1.3rem;border:1px solid var(--border);transition:all .25s; }
+  .clink:hover { border-color:var(--amber);color:var(--amber);transform:translateY(-2px); }
 
-  /* FOOTER */
-  footer {
-    background: #050505;
-    border-top: 1px solid var(--border);
-    padding: 1.5rem 4rem;
-    display: flex; justify-content: space-between; align-items: center;
-    flex-wrap: wrap; gap: 1rem;
-  }
-  .footer-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.9rem;
-    color: var(--muted);
-  }
-  .footer-note {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    color: #555;
-    letter-spacing: 0.08em;
-  }
+  footer { background:#050505;border-top:1px solid var(--border);padding:1.5rem 4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem; }
+  .fn { font-family:'Playfair Display',serif;font-size:.9rem;color:var(--muted); }
+  .fnt { font-family:'DM Mono',monospace;font-size:.63rem;color:#444;letter-spacing:.08em; }
 
-  /* DIVIDER */
-  .divider {
-    width: 64px; height: 2px;
-    background: var(--amber);
-    margin: 1rem 0 2.5rem;
+  @media (max-width:1100px) {
+    .pillars-grid { grid-template-columns:1fr; }
+    .pillar { border-right:none;border-bottom:1px solid var(--border); }
+    .pillar:last-child { border-bottom:none; }
+    .tcols { grid-template-columns:1fr; }
   }
-
-  /* AVAILABILITY BADGE */
-  .availability {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
-    color: #3ec97a;
-    margin-top: 2rem;
-    opacity: 0;
-    animation: fadeUp 0.9s 1.2s forwards;
-  }
-  .availability-dot {
-    width: 7px; height: 7px;
-    background: #3ec97a;
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.5); }
-  }
-
-  /* SCROLL ANIMATIONS */
-  .animate-on-scroll {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .animate-on-scroll.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
-    #hero { padding: 7rem 1.5rem 4rem; }
-    section { padding: 5rem 1.5rem; }
-    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    .hero-stats { gap: 1.8rem; flex-wrap: wrap; }
-    .hero-accent { display: none; }
-    footer { padding: 1.5rem; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .publication-card { flex-direction: column; gap: 1rem; }
+  @media (max-width:768px) {
+    nav { padding:1rem 1.5rem; } .nav-links { display:none; }
+    section { padding:5rem 1.5rem; } #hero { padding:7rem 1.5rem 4rem; }
+    .hero-accent { display:none; } footer { padding:1.5rem; }
+    .pgrid { grid-template-columns:1fr; }
   }
 </style>
 </head>
 <body>
-
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
@@ -795,7 +203,7 @@
   <div class="nav-logo">SS</div>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
+    <li><a href="#pillars">Expertise</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -806,420 +214,423 @@
 <section id="hero">
   <div class="hero-grid-bg"></div>
   <div class="hero-accent"></div>
-
-  <p class="hero-eyebrow">Data Scientist · Analyst · ML Engineer</p>
+  <p class="hero-eyebrow">Data Scientist · Analyst · ML / AI / GenAI Engineer</p>
   <h1 class="hero-name">Shruti<br /><em>Sharma</em></h1>
-  <p class="hero-tagline">
-    I turn raw, chaotic data into stories that drive decisions — combining statistical rigor, machine learning, and engineering depth to deliver measurable business impact.
-  </p>
-
-  <div class="availability">
-    <span class="availability-dot"></span>
-    Open to Data Science & Analytics Roles
-  </div>
-
+  <p class="hero-tagline">I sit at the intersection of technology, data, and business — trained as a computer scientist, educated as a statistician, and proven as someone who translates both into outcomes that move revenue and product. <strong style="color:var(--cream)">4+ years of professional experience</strong> across industry, plus <strong style="color:var(--cream)">1.5 years of applied data science</strong> during my Master's building real ML systems.</p>
+  <div class="availability"><span class="availability-dot"></span>Open to Data Science, Analytics & ML Engineering Roles</div>
   <div class="hero-stats">
-    <div class="stat-item">
-      <div class="stat-num">6+</div>
-      <div class="stat-label">Years Experience</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">10M+</div>
-      <div class="stat-label">Records / Month</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">20%</div>
-      <div class="stat-label">QoQ Revenue Growth</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">94%</div>
-      <div class="stat-label">ML Model Accuracy</div>
-    </div>
+    <div class="stat-item"><div class="stat-num">4+</div><div class="stat-label">Yrs Professional Exp</div></div>
+    <div class="stat-item"><div class="stat-num">1.5</div><div class="stat-label">Yrs Applied Research</div></div>
+    <div class="stat-item"><div class="stat-num">10M+</div><div class="stat-label">Records / Month</div></div>
+    <div class="stat-item"><div class="stat-num">$80K+</div><div class="stat-label">QoQ Revenue Lift</div></div>
+    <div class="stat-item"><div class="stat-num">94%</div><div class="stat-label">ML Model Accuracy</div></div>
   </div>
-
   <div class="hero-ctas">
-    <a href="#projects" class="btn btn-primary">View My Work →</a>
-    <a href="mailto:shrutisharma.career@gmail.com" class="btn btn-outline">Get In Touch</a>
+    <a href="#pillars" class="btn btn-primary">Explore My Work →</a>
+    <a href="mailto:shruti.sharma0369@gmail.com" class="btn btn-outline">Get In Touch</a>
     <a href="https://github.com/shrutishharmacareer" target="_blank" class="btn btn-outline">GitHub ↗</a>
+    <a href="https://www.linkedin.com/in/shrutisharma09/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
   </div>
-
-  <div class="hero-scroll-hint">
-    <span class="scroll-line"></span>
-    Scroll to explore
-  </div>
+  <div class="hero-scroll-hint"><span class="scroll-line"></span>Scroll to explore</div>
 </section>
 
 <!-- ABOUT -->
 <section id="about">
-  <p class="section-label">// 01 — About</p>
-  <h2 class="section-title">The analyst who ships,<br /><em>not just slides.</em></h2>
-
-  <!-- Photo + bio row -->
-  <div class="about-intro animate-on-scroll">
-    <div class="photo-wrapper">
-      <div class="photo-frame">
-        <!-- ✏️ TO ADD YOUR PHOTO: Replace the div below with:
-             <img src="your-photo.jpg" alt="Shruti Sharma" style="width:100%;height:100%;object-fit:cover;" />
-        -->
-        <div class="photo-placeholder">
-          <div class="photo-icon">👩‍💻</div>
-          <div class="photo-label">Your photo<br />goes here</div>
-          <div class="photo-upload-hint">Replace with an &lt;img&gt; tag<br />when ready</div>
-        </div>
-      </div>
-      <div class="photo-shadow-box"></div>
-      <div class="photo-name-tag">
-        <strong>Shruti Sharma</strong>
-        <span>Data Scientist · ML Engineer</span>
-        <p class="photo-edu">M.S. Statistics & CS · SJSU 2023<br />San Jose, CA · Open to Remote</p>
-      </div>
-    </div>
-
-    <div class="about-text">
-      <p>I'm a <strong>Data Scientist and Analyst</strong> with a Master's in Statistics & Computer Science from San Jose State University and 6+ years building data solutions that actually move business metrics.</p>
-      <p>My edge: I combine <strong>deep statistical thinking</strong> — causal inference, time-series modeling, A/B experimentation — with the <strong>engineering muscle</strong> to build the pipelines that power those insights end-to-end.</p>
-      <p>At <strong>Iconic Artists Group</strong>, I built the analytics infrastructure from scratch — forecasting revenue, analyzing catalog performance, and directly informing marketing strategies that drove <strong>$80K+ QoQ growth</strong>. Before that, I built ML systems at TCS and IoT data pipelines at Secomind.</p>
-      <p>Now I'm pushing into <strong>Generative AI & LLM-powered data tools</strong> — building NL-to-SQL pipelines, AI agents, and self-healing query engines that make data accessible to everyone.</p>
-    </div>
-  </div>
-
-  <!-- Highlight cards -->
-  <div class="about-highlights animate-on-scroll" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem;margin-top:1rem;">
-    <div class="highlight-card">
-      <h4>📊 Analytics & Experimentation</h4>
-      <p>Causal inference, A/B testing, quasi-experiments, time-series forecasting, KPI modeling — I design experiments that produce answers, not noise.</p>
-    </div>
-    <div class="highlight-card">
-      <h4>🤖 ML & Deep Learning</h4>
-      <p>Classification, recommender systems, computer vision, NLP, XGBoost, CNNs, ResNet — built and deployed models across multiple industries.</p>
-    </div>
-    <div class="highlight-card">
-      <h4>⚡ Data Engineering at Scale</h4>
-      <p>End-to-end pipelines on Azure, Databricks, Snowflake, Spark — processing millions of records reliably and on time.</p>
-    </div>
-    <div class="highlight-card">
-      <h4>🧠 GenAI & LLM Applications</h4>
-      <p>Building AI-powered tools using OpenAI APIs, LangChain, and agentic workflows — including NL-to-SQL engines and self-healing query systems.</p>
-    </div>
-    <div class="highlight-card">
-      <h4>🎓 Research & Publication</h4>
-      <p>Published in Computers & Security (Elsevier) on darknet traffic classification using ML/DL techniques — DOI: 10.1016/j.cose.2023.103098</p>
+  <p class="section-label">// 01 — About Me</p>
+  <h2 class="section-title">Tech brain. Data rigour.<br /><em>Business instinct.</em></h2>
+  <div class="about-text animate-on-scroll" style="max-width:860px;">
+    <p>I'm a <strong>data scientist and analyst</strong> with <strong>4+ years of full-time professional experience</strong> across e-commerce, music, IoT, and enterprise tech — working as a data scientist, analyst, and engineer at companies ranging from early-stage startups to global consulting firms. I've been embedded in real business decisions — advising founders on pricing, guiding marketing strategy at a music label, and translating complex model outputs into boardroom-ready insights at TCS. I don't just deliver analyses; I own outcomes.</p>
+    <p>On top of that, I built <strong>1.5 years of hands-on internship and co-op experience</strong> during my studies — applied data science work pursued alongside both my Master's and Bachelor's degrees respectively. This wasn't coursework — it was real projects in ML, data engineering, and analytics for actual clients and research programmes, including work that led to a peer-reviewed publication.</p>
+    <p>Academically, I hold a <strong>Master of Science in Data Science, majoring in Statistics and Computer Science</strong> from San Jose State University (2023) and a <strong>Bachelor of Technology in Computer Science</strong> from Jamia Hamdard University (2018). That combination gives me something rare: the engineering foundation to build the systems, the statistical training to design experiments and interpret results correctly, and the data science depth to apply ML end-to-end. I can go deep on any part of the stack — and switch between them without losing rigour.</p>
+    <p>Beyond professional work, I've independently built projects across <strong>self-driving car steering prediction, cancer classification from medical pathology images, darknet cybersecurity traffic detection, and personalized travel recommendation</strong> — each exploring a different domain using different ML and deep learning techniques. One of these led to a <strong>peer-reviewed publication in Computers & Security (Elsevier, 2023)</strong>. I build outside of work because I'm genuinely curious, and because the best way to stay sharp is to keep shipping.</p>
+    <div class="about-chips">
+      <span class="about-chip">4+ Yrs Full-Time Professional Experience</span>
+      <span class="about-chip">1.5 Yrs Internship / Co-op (Master's & Bachelor's)</span>
+      <span class="about-chip">M.S. Data Science — Statistics & CS · SJSU 2023</span>
+      <span class="about-chip">B.Tech Computer Science · Jamia Hamdard 2018</span>
+      <span class="about-chip">Published Researcher · Elsevier 2023</span>
+      <span class="about-chip">Bay Area, California · Open to Remote</span>
     </div>
   </div>
 </section>
 
-<!-- SKILLS -->
-<section id="skills">
-  <p class="section-label">// 02 — Skills & Stack</p>
-  <h2 class="section-title">Tools I <em>master.</em></h2>
-  <div class="skills-grid">
-    <div class="skill-category animate-on-scroll">
-      <div class="skill-category-icon">🐍</div>
-      <h3>Languages</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">Python</span>
-        <span class="skill-tag">SQL (Advanced)</span>
-        <span class="skill-tag">R</span>
-        <span class="skill-tag">PostgreSQL</span>
-        <span class="skill-tag">T-SQL</span>
-        <span class="skill-tag">MATLAB</span>
+<!-- THREE PILLARS OF EXPERTISE -->
+<section id="pillars">
+  <p class="section-label">// 02 — Three Areas of Deep Expertise</p>
+  <h2 class="section-title animate-on-scroll">Everything I <em>bring to the table.</em></h2>
+
+  <div class="pillars-grid animate-on-scroll">
+
+    <!-- PILLAR 1: DATA ENGINEERING -->
+    <div class="pillar p1">
+      <div class="pillar-bar"></div>
+      <div class="pillar-num">01 /</div>
+      <h3 class="pillar-title">Data Engineering</h3>
+      <p class="pillar-sub">Building the plumbing that makes everything else possible — scalable pipelines, cloud data warehouses, real-time streaming, and the infrastructure that keeps data flowing reliably at scale.</p>
+      <div class="pillar-skills">
+        <span class="ptag">Azure Data Factory</span><span class="ptag">PySpark</span><span class="ptag">Databricks</span>
+        <span class="ptag">Snowflake</span><span class="ptag">Delta Lake</span><span class="ptag">dbt</span>
+        <span class="ptag">Kafka</span><span class="ptag">Azure Event Hub</span><span class="ptag">ETL / ELT</span>
+        <span class="ptag">PostgreSQL</span><span class="ptag">Azure SQL</span><span class="ptag">ADLS Gen2</span>
+        <span class="ptag">Terraform</span><span class="ptag">Docker / K8s</span><span class="ptag">CI/CD</span>
+        <span class="ptag">Azure IoT Hub</span><span class="ptag">Hadoop / HDFS</span><span class="ptag">AWS</span>
+      </div>
+      <div class="pdivider"></div>
+      <div class="p-proj-label">Featured Work</div>
+
+      <div class="mp">
+        <div class="mp-title">Music Streaming Data Lakehouse — Azure</div>
+        <div class="mp-desc">Built the full data infrastructure for a music label from scratch. Automated collection of streaming, royalty, and social data from 20+ artists; transformed and loaded it into a cloud warehouse for analytics and ML.</div>
+        <div class="mp-impact">⚡ 10M+ records collected every month · 30% improvement in data availability</div>
+      </div>
+      <div class="mp">
+        <div class="mp-title">Real-Time Artist Engagement Tracking</div>
+        <div class="mp-desc">Built a streaming data pipeline so the business could see how artists were trending on platforms in near-real time — rather than waiting for weekly reports.</div>
+        <div class="mp-impact">⚡ Near-real-time insights · Kafka + Spark streaming · 20+ artists tracked</div>
+      </div>
+      <div class="mp">
+        <div class="mp-title">IoT Smart Window Telemetry Pipeline</div>
+        <div class="mp-desc">Designed a pipeline to collect sensor data from smart windows in real time, store it in the cloud, and run predictive analytics on environmental trends.</div>
+        <div class="mp-impact">⚡ Real-time + batch hybrid architecture on Azure</div>
+        <div class="mp-links"><a href="https://github.com/shrutishharmacareer" target="_blank" class="mp-link">GitHub →</a></div>
       </div>
     </div>
-    <div class="skill-category animate-on-scroll">
-      <div class="skill-category-icon">📈</div>
-      <h3>Data Science & ML</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">Scikit-learn</span>
-        <span class="skill-tag">XGBoost</span>
-        <span class="skill-tag">TensorFlow</span>
-        <span class="skill-tag">PyTorch</span>
-        <span class="skill-tag">NLP / BERT</span>
-        <span class="skill-tag">Time-Series</span>
-        <span class="skill-tag">A/B Testing</span>
-        <span class="skill-tag">Causal Inference</span>
-        <span class="skill-tag">Recommender Systems</span>
+
+    <!-- PILLAR 2: DATA SCIENCE & ANALYTICS -->
+    <div class="pillar p2">
+      <div class="pillar-bar"></div>
+      <div class="pillar-num">02 /</div>
+      <h3 class="pillar-title">Data Science &amp; Analytics</h3>
+      <p class="pillar-sub">Answering the questions that matter — what's driving revenue, which campaigns actually worked, what customers will do next, and how to measure it in a way that's statistically honest.</p>
+      <div class="pillar-skills">
+        <span class="ptag">Python</span><span class="ptag">SQL (Advanced)</span><span class="ptag">R</span>
+        <span class="ptag">Statistical Modeling</span><span class="ptag">Time-Series Forecasting</span>
+        <span class="ptag">Causal Inference</span><span class="ptag">A/B Testing</span>
+        <span class="ptag">Experimentation Design</span><span class="ptag">Revenue Modeling</span>
+        <span class="ptag">Regression Analysis</span><span class="ptag">Customer Segmentation</span>
+        <span class="ptag">Power BI</span><span class="ptag">Tableau</span><span class="ptag">KPI Design</span>
+        <span class="ptag">Funnel Analytics</span><span class="ptag">Pricing Analysis</span>
+      </div>
+      <div class="pdivider"></div>
+      <div class="p-proj-label">Featured Work</div>
+
+      <div class="mp">
+        <div class="mp-title">Startup Product Analytics Stack — Zentrovia</div>
+        <div class="mp-desc">Built a company's very first analytics system from the ground up — defined the key metrics (North Star KPIs), set up funnel tracking, and created a causal measurement framework to test whether their promotions were helping or hurting margins.</div>
+        <div class="mp-impact">📈 Directly advised founders on pricing · Protected early-stage margins from promo cannibalization</div>
+      </div>
+      <div class="mp">
+        <div class="mp-title">Music Revenue Forecasting & Campaign Analysis</div>
+        <div class="mp-desc">Built forecasting models to predict catalog revenue, and ran "causal impact" experiments to measure whether marketing campaigns (re-releases, playlist pushes) actually increased streams and listeners.</div>
+        <div class="mp-impact">📈 ~20% quarter-over-quarter revenue growth ($80K) · ~15% forecast error at catalog level</div>
+      </div>
+      <div class="mp">
+        <div class="mp-title">Customer Segmentation & Personalization @ TCS</div>
+        <div class="mp-desc">Grouped customers by behaviour patterns and built models to predict who would buy what. Used A/B testing to confirm which personalized recommendations actually moved the needle.</div>
+        <div class="mp-impact">📈 Improved conversion rates & customer lifetime value for a US enterprise client</div>
       </div>
     </div>
-    <div class="skill-category animate-on-scroll">
-      <div class="skill-category-icon">🧠</div>
-      <h3>GenAI & LLMs</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">OpenAI API</span>
-        <span class="skill-tag">LangChain</span>
-        <span class="skill-tag">LLM Agents</span>
-        <span class="skill-tag">RAG Pipelines</span>
-        <span class="skill-tag">Prompt Engineering</span>
-        <span class="skill-tag">NL-to-SQL</span>
-        <span class="skill-tag">Streamlit</span>
+
+    <!-- PILLAR 3: ML / AI / GENAI -->
+    <div class="pillar p3">
+      <div class="pillar-bar"></div>
+      <div class="pillar-num">03 /</div>
+      <h3 class="pillar-title">ML · Deep Learning · GenAI</h3>
+      <p class="pillar-sub">Building intelligent systems — recommendation engines, AI-powered automation, computer vision models, and LLM agents that make products smarter and operations faster.</p>
+      <div class="pillar-skills">
+        <span class="ptag">OpenAI API</span><span class="ptag">LangChain</span><span class="ptag">LLM Agents</span>
+        <span class="ptag">RAG Pipelines</span><span class="ptag">NL-to-SQL</span><span class="ptag">Prompt Engineering</span>
+        <span class="ptag">XGBoost</span><span class="ptag">TensorFlow</span><span class="ptag">CNN / ResNet / VGG</span>
+        <span class="ptag">NLP / BERT</span><span class="ptag">Recommender Systems</span>
+        <span class="ptag">DeepWalk</span><span class="ptag">Scikit-learn</span><span class="ptag">Computer Vision</span>
+        <span class="ptag">SKU Attribute Extraction</span><span class="ptag">Streamlit</span>
+      </div>
+      <div class="pdivider"></div>
+      <div class="p-proj-label">Featured Work</div>
+
+      <div class="mp">
+        <div class="mp-title">AI-Powered E-Commerce Features — Zentrovia</div>
+        <div class="mp-desc">Built two AI systems for an e-commerce startup: (1) a recommendation engine that suggested products to increase basket size, and (2) an AI pipeline that automatically reads product descriptions and fills in catalogue attributes — replacing a manual process.</div>
+        <div class="mp-impact">🤖 +15% Average Order Value · 30% faster time-to-site for new products · Scaled catalog without adding headcount</div>
+      </div>
+      <div class="mp">
+        <div class="mp-title">NL-to-SQL AI Agent (Self-Healing) — Live Demo</div>
+        <div class="mp-desc">Built a tool where anyone can type a question in plain English and instantly get the answer from a database — no SQL knowledge needed. If the AI makes a mistake, it automatically detects the error and tries again.</div>
+        <div class="mp-impact">🤖 Deployed live · 2,800+ real records · Zero destructive queries</div>
+        <div class="mp-links">
+          <a href="https://nl-to-sql-pipeline-kdwtwwxdjbkwu4zfrr6dss.streamlit.app/" target="_blank" class="mp-link">Live App →</a>
+          <a href="https://github.com/shrutishharmacareer/nl-to-sql-pipeline" target="_blank" class="mp-link">GitHub →</a>
+        </div>
+      </div>
+      <div class="mp">
+        <div class="mp-title">Darknet Traffic Classification — Published Research</div>
+        <div class="mp-desc">Research study testing which ML and deep learning methods are best at identifying suspicious internet traffic — with analysis of how well these models hold up against adversarial attacks designed to fool them.</div>
+        <div class="mp-impact">🤖 Published · Computers & Security, Elsevier 2023</div>
+        <div class="mp-links"><a href="https://www.sciencedirect.com/science/article/pii/S0167404823000081" target="_blank" class="mp-link">Read Paper →</a></div>
       </div>
     </div>
-    <div class="skill-category animate-on-scroll">
-      <div class="skill-category-icon">☁️</div>
-      <h3>Cloud & Data Engineering</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">Microsoft Azure</span>
-        <span class="skill-tag">Azure Data Factory</span>
-        <span class="skill-tag">ADLS</span>
-        <span class="skill-tag">Databricks</span>
-        <span class="skill-tag">Snowflake</span>
-        <span class="skill-tag">Delta Lake</span>
-        <span class="skill-tag">AWS</span>
-        <span class="skill-tag">dbt</span>
-      </div>
-    </div>
-    <div class="skill-category animate-on-scroll">
-      <div class="skill-category-icon">⚡</div>
-      <h3>Big Data & Streaming</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">Apache Spark</span>
-        <span class="skill-tag">PySpark</span>
-        <span class="skill-tag">Kafka</span>
-        <span class="skill-tag">Azure Event Hub</span>
-        <span class="skill-tag">Hadoop</span>
-        <span class="skill-tag">HDFS</span>
-      </div>
-    </div>
-    <div class="skill-category animate-on-scroll">
-      <div class="skill-category-icon">📊</div>
-      <h3>Analytics & Visualization</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">Power BI</span>
-        <span class="skill-tag">Tableau</span>
-        <span class="skill-tag">Statistical Modeling</span>
-        <span class="skill-tag">Regression Analysis</span>
-        <span class="skill-tag">Clustering</span>
-        <span class="skill-tag">Revenue Modeling</span>
-      </div>
-    </div>
-    <div class="skill-category animate-on-scroll">
-      <div class="skill-category-icon">🔧</div>
-      <h3>DevOps & Infrastructure</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">Docker</span>
-        <span class="skill-tag">Kubernetes</span>
-        <span class="skill-tag">Terraform</span>
-        <span class="skill-tag">CI/CD</span>
-        <span class="skill-tag">Azure DevOps</span>
-        <span class="skill-tag">Git / GitHub</span>
-        <span class="skill-tag">Jenkins</span>
-      </div>
-    </div>
+
   </div>
 </section>
 
 <!-- EXPERIENCE -->
 <section id="experience">
-  <p class="section-label">// 03 — Experience</p>
+  <p class="section-label">// 03 — Work Experience</p>
   <h2 class="section-title">Where I've <em>driven impact.</em></h2>
-
   <div class="timeline">
 
+    <!-- ZENTROVIA -->
     <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-meta">
-        <span class="timeline-company">Independent Consultant</span>
-        <span class="timeline-date">Dec 2024 – Present</span>
+      <div class="tdot"></div>
+      <div class="tmeta">
+        <span class="tco">Zentrovia Consultants</span>
+        <span class="tdate">Sept 2025 – Dec 2025</span>
+        <span class="tloc">· New Delhi, India</span>
       </div>
-      <h3 class="timeline-role">ML Pipelines & GenAI Engineer</h3>
-      <ul class="timeline-bullets">
-        <li>Built an end-to-end <strong>NL-to-SQL pipeline</strong> converting plain-English questions into PostgreSQL queries using LLMs, eliminating the need for SQL knowledge among business users</li>
-        <li>Designed a <strong>schema-aware prompt system</strong> that injects live DB metadata into LLM context, dramatically improving query accuracy</li>
-        <li>Implemented a <strong>self-healing SQL engine</strong> that auto-detects query failures, sends errors back to AI for correction, and retries — zero manual intervention</li>
-        <li>Built safety validation layer blocking all destructive SQL before execution; deployed on <strong>Streamlit Cloud with Neon PostgreSQL</strong>, processing 2,800+ real sales records</li>
-      </ul>
-      <div class="timeline-tags">
-        <span class="timeline-tag">OpenAI API</span>
-        <span class="timeline-tag">LangChain</span>
-        <span class="timeline-tag">PostgreSQL</span>
-        <span class="timeline-tag">Streamlit</span>
-        <span class="timeline-tag">LLM Agents</span>
+      <h3 class="trole">Lead Data Scientist</h3>
+      <p class="trole-context">Founding data hire at an early-stage e-commerce startup. Responsible for standing up the entire data and ML function — from defining business metrics to shipping AI-powered product features.</p>
+
+      <div class="tproj">
+        <div class="tproj-title"><span class="tclabel a">🤖 Project 1 — AI-Powered Product Features</span></div>
+        <ul class="tbullets">
+          <li>Built and launched a <strong>product recommendation engine</strong> that analysed what customers were browsing and buying to suggest relevant items — directly increasing how much customers spent per visit by <strong>15% (Average Order Value)</strong></li>
+          <li>Shipped an <strong>LLM pipeline (OpenAI + LangChain)</strong> that automatically reads product descriptions and extracts catalogue attributes (size, colour, material, category) — replacing a manual, human-driven process. Cut the time to get a new product live on site by <strong>30%</strong> and scaled the catalogue without hiring additional operations staff</li>
+        </ul>
+      </div>
+
+      <div class="tproj">
+        <div class="tproj-title"><span class="tclabel s">📈 Project 2 — Founding Analytics Stack & Pricing Strategy</span></div>
+        <ul class="tbullets">
+          <li>Acted as the <strong>founding analytics lead</strong> — defined the company's first North Star metrics, set up funnel conversion tracking, and established the framework to measure whether promotions were genuinely growing the business or cannibalising sales across categories</li>
+          <li>Directly <strong>advised founders on pricing strategy</strong> using causal analysis — helping them understand which markdowns were protecting margins and which were eroding them, informing early-stage financial decisions</li>
+        </ul>
+      </div>
+
+      <div class="ttags">
+        <span class="ttag">OpenAI API</span><span class="ttag">LangChain</span><span class="ttag">Recommender Systems</span>
+        <span class="ttag">Product Analytics</span><span class="ttag">Causal Inference</span><span class="ttag">Python</span>
+        <span class="ttag">SQL</span><span class="ttag">Funnel Analytics</span><span class="ttag">Pricing Strategy</span>
       </div>
     </div>
 
+    <!-- ICONIC -->
     <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-meta">
-        <span class="timeline-company">Iconic Artists Group</span>
-        <span class="timeline-date">Jul 2022 – Nov 2024</span>
+      <div class="tdot"></div>
+      <div class="tmeta">
+        <span class="tco">Iconic Artists Group</span>
+        <span class="tdate">Jul 2022 – Nov 2024</span>
+        <span class="tloc">· Los Angeles, CA</span>
       </div>
-      <h3 class="timeline-role">Data Scientist & Analytics Engineer</h3>
-      <ul class="timeline-bullets">
-        <li>Built and automated data ingestion pipelines via ADF & Azure Functions, ingesting <strong>10M+ records/month</strong> for 20+ artists with 30% improved data availability</li>
-        <li>Implemented <strong>time-series forecasting models</strong> with rolling backtests achieving ~15% error at catalog level, directly guiding revenue planning</li>
-        <li>Analyzed audience cohorts and listening behavior to identify growth KPIs — insights that informed strategies driving <strong>~20% QoQ ($80K) revenue growth</strong></li>
-        <li>Led <strong>causal impact & quasi-experimental analyses</strong> on re-releases and marketing campaigns to quantify stream lift and listener conversion</li>
-        <li>Developed executive-facing <strong>Power BI dashboards</strong> tracking catalog performance and campaign impact to drive leadership decisions</li>
-        <li>Designed <strong>Databricks + Delta Lake + Snowflake</strong> data lakehouse with star schema models supporting analytics and ML workflows</li>
-      </ul>
-      <div class="timeline-tags">
-        <span class="timeline-tag">Python</span>
-        <span class="timeline-tag">SQL</span>
-        <span class="timeline-tag">Azure</span>
-        <span class="timeline-tag">Causal Inference</span>
-        <span class="timeline-tag">Time-Series</span>
-        <span class="timeline-tag">Power BI</span>
-        <span class="timeline-tag">Databricks</span>
-        <span class="timeline-tag">Snowflake</span>
+      <h3 class="trole">Data Scientist & Analyst</h3>
+      <p class="trole-context">Sole data professional at a music label managing 20+ artists. Built the entire data infrastructure from zero, then used it to run analytics and ML that drove revenue and marketing decisions.</p>
+
+      <div class="tproj">
+        <div class="tproj-title"><span class="tclabel e">⚡ Project 1 — Data Infrastructure & Engineering</span></div>
+        <ul class="tbullets">
+          <li>Built automated pipelines that collected <strong>streaming numbers, social media stats, and royalty payments</strong> daily from APIs — processing over <strong>10 million records every month</strong> for 20+ artists with 30% improved data availability</li>
+          <li>Designed a <strong>cloud data warehouse (Databricks + Delta Lake + Snowflake)</strong> that organised all this data into clean, queryable tables — the foundation for every report, dashboard, and ML model at the company</li>
+          <li>Created a <strong>real-time data stream (Kafka + Azure Event Hub)</strong> so the team could see how an artist was trending on platforms within minutes — not days</li>
+          <li>Automated infrastructure deployment using <strong>Terraform, Docker, and CI/CD</strong> — so system updates rolled out reliably without manual intervention</li>
+        </ul>
+      </div>
+
+      <div class="tproj">
+        <div class="tproj-title"><span class="tclabel s">📈 Project 2 — Revenue Forecasting & Campaign Analytics</span></div>
+        <ul class="tbullets">
+          <li>Built <strong>time-series forecasting models</strong> that predicted catalog revenue with ~15% error — used directly by leadership for quarterly financial planning</li>
+          <li>Ran <strong>causal impact experiments</strong> to measure whether re-releases, playlist pitches, and marketing campaigns actually increased streams and converted new listeners — or just moved existing fans around</li>
+          <li>Analysed listener behaviour and audience cohorts to identify which artists had the highest growth potential — insights that informed strategies driving <strong>~$80K quarter-over-quarter revenue growth (~20%)</strong></li>
+        </ul>
+      </div>
+
+      <div class="tproj">
+        <div class="tproj-title"><span class="tclabel s">📊 Project 3 — Executive Dashboards & Business Intelligence</span></div>
+        <ul class="tbullets">
+          <li>Built <strong>Power BI dashboards</strong> used by executives to track artist performance, DSP-level revenue, campaign ROI, and audience growth — all in one place, updated automatically</li>
+          <li>Designed SQL data models and views that made it easy for non-technical stakeholders to answer their own questions about catalog performance without needing an analyst's help each time</li>
+        </ul>
+      </div>
+
+      <div class="ttags">
+        <span class="ttag">Python</span><span class="ttag">SQL</span><span class="ttag">Azure ADF</span><span class="ttag">Databricks</span><span class="ttag">Snowflake</span>
+        <span class="ttag">Kafka</span><span class="ttag">Causal Inference</span><span class="ttag">Time-Series</span><span class="ttag">Power BI</span><span class="ttag">dbt</span><span class="ttag">PySpark</span>
       </div>
     </div>
 
+    <!-- STUDIOX -->
     <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-meta">
-        <span class="timeline-company">Secomind.ai</span>
-        <span class="timeline-date">Dec 2019 – Dec 2020</span>
+      <div class="tdot"></div>
+      <div class="tmeta">
+        <span class="tco">StudioX</span>
+        <span class="tdate">Dec 2019 – Dec 2020</span>
+        <span class="tloc">· New Delhi, India</span>
       </div>
-      <h3 class="timeline-role">Data Scientist & ML Consultant</h3>
-      <ul class="timeline-bullets">
-        <li>Led analytics engagements for U.S. clients — collaborated with cross-functional stakeholders, <strong>mentored 3 analysts</strong></li>
-        <li>Designed <strong>regression-based models to optimize incentive compensation plans</strong>, improving spend efficiency by ~15%</li>
-        <li>Automated <strong>sales goal-setting workflows</strong> using data pipelines, reducing manual effort by ~40%</li>
-        <li>Built and deployed <strong>IoT telemetry pipelines</strong> using Azure IoT Hub → Azure SQL for real-time and batch smart device data</li>
-      </ul>
-      <div class="timeline-tags">
-        <span class="timeline-tag">Python</span>
-        <span class="timeline-tag">SQL</span>
-        <span class="timeline-tag">Azure IoT Hub</span>
-        <span class="timeline-tag">Regression Models</span>
-        <span class="timeline-tag">ETL</span>
+      <h3 class="trole">ML Engineer</h3>
+      <p class="trole-context">ML and data engineering consulting for U.S. clients — built IoT data infrastructure, ML-powered optimisation models, and automated analytics workflows end-to-end.</p>
+
+      <div class="tproj">
+        <div class="tproj-title"><span class="tclabel e">⚡ Project — IoT Data Pipeline for Smart Devices</span></div>
+        <ul class="tbullets">
+          <li>Built a <strong>cloud pipeline to collect real-time sensor data</strong> from smart window devices — data flowed from the physical device (Azure IoT Hub) → cloud storage → database, enabling environmental trend analysis</li>
+          <li>Designed the system to handle both <strong>real-time streams and batched daily loads</strong>, so analysts could query historical patterns as well as monitor live conditions</li>
+        </ul>
+      </div>
+
+      <div class="ttags">
+        <span class="ttag">Python</span><span class="ttag">SQL</span><span class="ttag">Azure IoT Hub</span><span class="ttag">ADF</span><span class="ttag">Regression Modeling</span><span class="ttag">R</span><span class="ttag">Tableau</span>
       </div>
     </div>
 
+    <!-- TCS -->
     <div class="timeline-item">
-      <div class="timeline-dot"></div>
-      <div class="timeline-meta">
-        <span class="timeline-company">Tata Consultancy Services</span>
-        <span class="timeline-date">Sep 2018 – Dec 2019</span>
+      <div class="tdot"></div>
+      <div class="tmeta">
+        <span class="tco">Tata Consultancy Services</span>
+        <span class="tdate">Sep 2018 – Dec 2019</span>
+        <span class="tloc">· Chennai, India</span>
       </div>
-      <h3 class="timeline-role">Data Scientist</h3>
-      <ul class="timeline-bullets">
-        <li>Built <strong>customer segmentation, recommendation, and predictive models</strong> on transaction, clickstream, and demographic data to personalize experiences</li>
-        <li>Developed an <strong>XGBoost-powered bug triage system at 94% accuracy</strong>, improving issue resolution efficiency by 40%</li>
-        <li>Designed and evaluated <strong>A/B experiments and dashboards</strong> to quantify lift from personalized offers, translating results into actionable strategies</li>
-        <li>Integrated systems via <strong>REST APIs</strong>, delivering a notable annual cost reduction of 3%</li>
-      </ul>
-      <div class="timeline-tags">
-        <span class="timeline-tag">Python</span>
-        <span class="timeline-tag">XGBoost</span>
-        <span class="timeline-tag">A/B Testing</span>
-        <span class="timeline-tag">Customer Analytics</span>
-        <span class="timeline-tag">Power BI</span>
+      <h3 class="trole">Data Scientist</h3>
+      <p class="trole-context">Data science for a large US retail client — two parallel workstreams: personalising the customer shopping experience using ML, and building internal tooling that made the engineering team significantly more efficient.</p>
+
+      <div class="tproj">
+        <div class="tproj-title"><span class="tclabel s">📈 Project 1 — Customer Personalisation & Experimentation</span></div>
+        <ul class="tbullets">
+          <li>Built <strong>customer segmentation models</strong> that grouped millions of shoppers by browsing and purchase behaviour — allowing the business to target each segment with relevant messaging and offers</li>
+          <li>Built <strong>product recommendation models</strong> that predicted what each customer was likely to buy next, based on their transaction history and clickstream data — improving both conversion rates and repeat purchase frequency</li>
+          <li>Designed and ran <strong>A/B experiments</strong> to rigorously test whether personalised recommendations actually moved the needle on sales — and translated results into clear recommendations for senior business stakeholders</li>
+        </ul>
+      </div>
+
+      <div class="tproj">
+        <div class="tproj-title"><span class="tclabel a">🤖 Project 2 — ML-Powered Bug Triage Automation</span></div>
+        <ul class="tbullets">
+          <li>Built an <strong>XGBoost machine learning model</strong> to automatically read software bug tickets and classify their urgency and type — replacing a manual review process that consumed hours of engineering time daily</li>
+          <li>Engineered a <strong>feature extraction pipeline</strong> that converted unstructured ticket text into structured signals the model could learn from — achieving <strong>94% classification accuracy</strong> and saving <strong>40% of engineering triage time</strong></li>
+          <li>Integrated the system into existing ticketing tools via <strong>REST APIs</strong> so it worked seamlessly in the team's existing workflow — delivering a <strong>3% annual cost reduction</strong></li>
+        </ul>
+      </div>
+
+      <div class="ttags">
+        <span class="ttag">Python</span><span class="ttag">XGBoost</span><span class="ttag">A/B Testing</span><span class="ttag">Customer Analytics</span><span class="ttag">Segmentation</span><span class="ttag">Power BI</span><span class="ttag">REST APIs</span><span class="ttag">Feature Engineering</span>
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- PROJECTS -->
+<!-- ALL PROJECTS -->
 <section id="projects">
   <p class="section-label">// 04 — Projects & Research</p>
-  <h2 class="section-title">Work that <em>speaks louder</em><br />than a résumé.</h2>
+  <h2 class="section-title animate-on-scroll">Work that <em>speaks for itself.</em></h2>
+  <div class="pfilter">
+    <button class="fbtn active" onclick="filterP('all',this)">All</button>
+    <button class="fbtn" onclick="filterP('eng',this)">Data Engineering</button>
+    <button class="fbtn" onclick="filterP('sci',this)">Analytics & Product</button>
+    <button class="fbtn" onclick="filterP('ai',this)">ML / AI / GenAI</button>
+  </div>
+  <div class="pgrid" id="pgrid">
 
-  <div class="projects-grid">
+    <!-- ZENTROVIA AI -->
+    <div class="pcard ai">
+      <span class="pbadge">GenAI · LLM · E-Commerce</span>
+      <h3 class="ptitle">AI-Powered SKU Extraction & Recommendation Engine</h3>
+      <p class="pdesc">Built two production AI systems at Zentrovia: an LLM pipeline (OpenAI + LangChain) that automatically reads product descriptions and fills in catalogue data, and a recommendation engine that increases basket size by suggesting relevant products.</p>
+      <div class="pimpact">🤖 +15% Average Order Value · 30% faster product launch · Catalog scaled without extra headcount</div>
+      <div class="pstack"><span class="stag">OpenAI API</span><span class="stag">LangChain</span><span class="stag">Recommender Systems</span><span class="stag">Python</span><span class="stag">SQL</span></div>
+      <div class="plinks"><a href="https://www.linkedin.com/in/shrutisharma09/" target="_blank" class="plink">LinkedIn →</a></div>
+    </div>
 
-    <div class="project-card">
-      <div class="project-type">🤖 GenAI · LLM · Agentic AI</div>
-      <h3 class="project-title">SQL AI Agent with Self-Healing Engine</h3>
-      <p class="project-desc">Built a production-grade pipeline that converts natural language into PostgreSQL queries using LLMs. Features a self-healing loop that detects errors, sends them back to AI for correction, and re-executes automatically.</p>
-      <div class="project-impact">⚡ Processes 2,800+ real sales records · Zero destructive SQL — safety layer enforced · Deployed live on Streamlit Cloud + Neon PostgreSQL</div>
-      <div class="project-stack">
-        <span class="stack-tag">OpenAI API</span>
-        <span class="stack-tag">LangChain</span>
-        <span class="stack-tag">PostgreSQL</span>
-        <span class="stack-tag">Streamlit</span>
-        <span class="stack-tag">Python</span>
-        <span class="stack-tag">Neon DB</span>
-      </div>
-      <div class="project-links">
-        <a href="https://github.com/shrutishharmacareer/nl-to-sql-pipeline" target="_blank" class="project-link">GitHub →</a>
+    <!-- NL TO SQL -->
+    <div class="pcard ai">
+      <span class="pbadge">GenAI · LLM · Live App</span>
+      <h3 class="ptitle">NL-to-SQL AI Agent with Self-Healing Engine</h3>
+      <p class="pdesc">Ask a database a question in plain English, get an instant answer — no SQL needed. If the AI makes a mistake, it catches the error automatically and corrects itself. Fully deployed and live.</p>
+      <div class="pimpact">🤖 Live in production · 2,800+ real records · Safety-validated · Zero destructive queries</div>
+      <div class="pstack"><span class="stag">OpenAI API</span><span class="stag">LangChain</span><span class="stag">PostgreSQL</span><span class="stag">Streamlit</span><span class="stag">Python</span></div>
+      <div class="plinks">
+        <a href="https://nl-to-sql-pipeline-kdwtwwxdjbkwu4zfrr6dss.streamlit.app/" target="_blank" class="plink">Live App →</a>
+        <a href="https://github.com/shrutishharmacareer/nl-to-sql-pipeline" target="_blank" class="plink">GitHub →</a>
       </div>
     </div>
 
-    <div class="project-card">
-      <div class="project-type">📡 Research · ML · Cybersecurity</div>
-      <h3 class="project-title">Darknet Traffic Classification & Adversarial Attacks</h3>
-      <p class="project-desc">Published research evaluating ML and deep learning techniques to classify darknet traffic and underlying application types, including adversarial robustness analysis.</p>
-      <div class="project-impact">📄 Published in Computers & Security (Elsevier, 2023) · DOI: 10.1016/j.cose.2023.103098</div>
-      <div class="project-stack">
-        <span class="stack-tag">Python</span>
-        <span class="stack-tag">Deep Learning</span>
-        <span class="stack-tag">ML Classification</span>
-        <span class="stack-tag">Traffic Analysis</span>
-      </div>
-      <div class="project-links">
-        <a href="https://doi.org/10.1016/j.cose.2023.103098" target="_blank" class="project-link">Read Paper →</a>
-      </div>
+    <!-- MUSIC LAKEHOUSE -->
+    <div class="pcard eng">
+      <span class="pbadge">Data Engineering · Cloud · Azure</span>
+      <h3 class="ptitle">Music Streaming Data Lakehouse — Azure</h3>
+      <p class="pdesc">Built a complete cloud data warehouse for a music label — automated collection of streaming, royalty, and social data, transformed and organised for analytics and ML. The foundation for all business intelligence at the company.</p>
+      <div class="pimpact">⚡ 10M+ records/month · 30% improvement in data availability · 20+ artists</div>
+      <div class="pstack"><span class="stag">Azure ADF</span><span class="stag">Databricks</span><span class="stag">Delta Lake</span><span class="stag">Snowflake</span><span class="stag">PySpark</span><span class="stag">dbt</span></div>
+      <div class="plinks"><a href="https://www.linkedin.com/in/shrutisharma09/" target="_blank" class="plink">LinkedIn →</a></div>
     </div>
 
-    <div class="project-card">
-      <div class="project-type">🚗 Deep Learning · Computer Vision</div>
-      <h3 class="project-title">NVIDIA Autonomous Car</h3>
-      <p class="project-desc">Built a deep learning model to predict the steering wheel angle for autonomous vehicles using sensor camera images. Implemented and compared CNN, VGG, and ResNet architectures.</p>
-      <div class="project-impact">🎯 Optimized log loss across architectures · ResNet and VGG benchmarked against baseline CNN</div>
-      <div class="project-stack">
-        <span class="stack-tag">Python</span>
-        <span class="stack-tag">CNN</span>
-        <span class="stack-tag">VGG</span>
-        <span class="stack-tag">ResNet</span>
-        <span class="stack-tag">TensorFlow</span>
-        <span class="stack-tag">Computer Vision</span>
-      </div>
-      <div class="project-links">
-        <a href="https://github.com/shrutishharmacareer/self-driving-car" target="_blank" class="project-link">GitHub →</a>
-      </div>
+    <!-- MUSIC ANALYTICS -->
+    <div class="pcard sci">
+      <span class="pbadge">Analytics · Forecasting · Causal Inference</span>
+      <h3 class="ptitle">Music Catalog Revenue Analytics & Forecasting</h3>
+      <p class="pdesc">Revenue forecasting, campaign impact measurement, and audience analysis for a music label. Used causal statistics to distinguish campaigns that genuinely grew listeners from ones that just moved existing fans around.</p>
+      <div class="pimpact">📈 ~20% QoQ revenue growth ($80K) · ~15% forecast error · Power BI dashboards for leadership</div>
+      <div class="pstack"><span class="stag">Python</span><span class="stag">SQL</span><span class="stag">Power BI</span><span class="stag">Causal Inference</span><span class="stag">Time-Series</span></div>
+      <div class="plinks"><a href="https://www.linkedin.com/in/shrutisharma09/" target="_blank" class="plink">LinkedIn →</a></div>
     </div>
 
-    <div class="project-card">
-      <div class="project-type">🏥 Computer Vision · Medical Research</div>
-      <h3 class="project-title">Thymic Cancer Detection</h3>
-      <p class="project-desc">Research-oriented project classifying thymic cancerous cells into distinct cancer types from whole slide pathology images using dimensionality reduction and ML classification.</p>
-      <div class="project-impact">🔬 Used py_wsi + HistoQC for pathology image processing · SVD for dimensionality reduction · SVM classification on Azure</div>
-      <div class="project-stack">
-        <span class="stack-tag">Python</span>
-        <span class="stack-tag">py_wsi</span>
-        <span class="stack-tag">HistoQC</span>
-        <span class="stack-tag">SVD</span>
-        <span class="stack-tag">SVM</span>
-        <span class="stack-tag">Azure</span>
-      </div>
-      <div class="project-links">
-        <a href="https://github.com/shrutishharmacareer/Digital-Image-Pathology-Research" target="_blank" class="project-link">GitHub →</a>
-      </div>
+    <!-- REGRESSION -->
+    <div class="pcard sci">
+      <span class="pbadge">Analytics · Statistical Modeling</span>
+      <h3 class="ptitle">Regression Analysis — Statistical Modeling Toolkit</h3>
+      <p class="pdesc">A statistical modeling project exploring regression techniques for prediction and inference — including feature selection, residual diagnostics, multicollinearity handling, and model validation.</p>
+      <div class="pimpact">📈 End-to-end regression workflow · Applied to real-world datasets</div>
+      <div class="pstack"><span class="stag">Python</span><span class="stag">R</span><span class="stag">Regression</span><span class="stag">Statistical Modeling</span><span class="stag">Feature Selection</span></div>
+      <div class="plinks"><a href="https://github.com/shrutishharmacareer/RegressionAanalysis" target="_blank" class="plink">GitHub →</a></div>
     </div>
 
-    <div class="project-card">
-      <div class="project-type">✈️ Recommender Systems · Graph ML</div>
-      <h3 class="project-title">Recommended Travel Duration</h3>
-      <p class="project-desc">Reproduced and enhanced research on personalized travel recommender systems, experimenting with graph representation learning (DeepWalk) and advanced techniques to outperform baseline methods.</p>
-      <div class="project-impact">📈 Improved over baseline Dietz & Aggarwal results · Graph embeddings via DeepWalk for itinerary optimization</div>
-      <div class="project-stack">
-        <span class="stack-tag">Python</span>
-        <span class="stack-tag">DeepWalk</span>
-        <span class="stack-tag">NumPy</span>
-        <span class="stack-tag">Pandas</span>
-        <span class="stack-tag">Statistical Analysis</span>
-      </div>
-      <div class="project-links">
-        <a href="https://github.com/shrutishharmacareer" target="_blank" class="project-link">GitHub →</a>
-      </div>
+    <!-- DARKNET -->
+    <div class="pcard ai">
+      <span class="pbadge">ML · Cybersecurity · Published Research</span>
+      <h3 class="ptitle">Darknet Traffic Classification & Adversarial Attacks</h3>
+      <p class="pdesc">Research study comparing ML and deep learning methods for detecting suspicious internet traffic — and testing how well these models hold up when attackers try to fool them. Published in a peer-reviewed security journal.</p>
+      <div class="pimpact">🤖 Published: Computers & Security, Elsevier 2023 · DOI: 10.1016/j.cose.2023.103098</div>
+      <div class="pstack"><span class="stag">Python</span><span class="stag">Deep Learning</span><span class="stag">ML Classification</span><span class="stag">Adversarial ML</span></div>
+      <div class="plinks"><a href="https://www.sciencedirect.com/science/article/pii/S0167404823000081" target="_blank" class="plink">Read Paper →</a></div>
     </div>
 
-    <div class="project-card">
-      <div class="project-type">🎵 Analytics · Causal Inference · Business Impact</div>
-      <h3 class="project-title">Music Catalog Revenue Analytics Platform</h3>
-      <p class="project-desc">End-to-end analytics infrastructure for a music label managing 20+ artists — from data ingestion to executive dashboards, powering pricing, promotion, and release decisions.</p>
-      <div class="project-impact">💰 ~20% QoQ revenue growth ($80K+) attributed to insights · Time-series forecasting at ~15% catalog-level error</div>
-      <div class="project-stack">
-        <span class="stack-tag">Python</span>
-        <span class="stack-tag">SQL</span>
-        <span class="stack-tag">Azure ADF</span>
-        <span class="stack-tag">Power BI</span>
-        <span class="stack-tag">Causal Inference</span>
-        <span class="stack-tag">Databricks</span>
-      </div>
-      <div class="project-links">
-        <a href="https://www.linkedin.com/in/shrutisharma09/" target="_blank" class="project-link">LinkedIn →</a>
-      </div>
+    <!-- SELF DRIVING -->
+    <div class="pcard ai">
+      <span class="pbadge">Deep Learning · Computer Vision · Autonomous Vehicles</span>
+      <h3 class="ptitle">Self-Driving Car — Steering Angle Prediction</h3>
+      <p class="pdesc">Trained deep learning models to predict the correct steering angle for a self-driving car using camera images — mimicking how a human driver would respond to what they see on the road. Benchmarked multiple architectures.</p>
+      <div class="pimpact">🤖 CNN vs VGG vs ResNet benchmark · Log loss optimised across architectures</div>
+      <div class="pstack"><span class="stag">Python</span><span class="stag">CNN</span><span class="stag">VGG</span><span class="stag">ResNet</span><span class="stag">TensorFlow</span><span class="stag">Computer Vision</span></div>
+      <div class="plinks"><a href="https://github.com/shrutishharmacareer/self-driving-car/tree/main/Self_Driving_Car" target="_blank" class="plink">GitHub →</a></div>
+    </div>
+
+    <!-- CANCER -->
+    <div class="pcard ai">
+      <span class="pbadge">Computer Vision · Medical AI</span>
+      <h3 class="ptitle">Thymic Cancer Classification from Medical Images</h3>
+      <p class="pdesc">Built a system to automatically classify different types of thymic cancer from high-resolution pathology slide images — the kind of images a pathologist would examine under a microscope. Reduced a complex image to a diagnosis category.</p>
+      <div class="pimpact">🤖 Multi-class cancer typing · SVD + SVM pipeline on Azure</div>
+      <div class="pstack"><span class="stag">Python</span><span class="stag">py_wsi</span><span class="stag">HistoQC</span><span class="stag">SVD</span><span class="stag">SVM</span><span class="stag">Azure</span></div>
+      <div class="plinks"><a href="https://github.com/shrutishharmacareer/Digital-Image-Pathology-Research/blob/main/ThymomaFinalReport.pdf" target="_blank" class="plink">Report →</a></div>
+    </div>
+
+    <!-- TRAVEL RECOMMENDER -->
+    <div class="pcard ai">
+      <span class="pbadge">Recommender Systems · Graph ML</span>
+      <h3 class="ptitle">Personalized Travel Duration Recommender</h3>
+      <p class="pdesc">Built a recommendation system that suggests how long a traveller should stay in each destination — using graph-based machine learning to understand connections between places, travellers, and trip patterns.</p>
+      <div class="pimpact">📈 Outperformed published research baseline · DeepWalk graph embeddings</div>
+      <div class="pstack"><span class="stag">Python</span><span class="stag">DeepWalk</span><span class="stag">Graph ML</span><span class="stag">NumPy</span><span class="stag">Pandas</span></div>
+      <div class="plinks"><a href="https://github.com/shrutishharmacareer/Recommendation/blob/main/Recommendation_Proposed.ipynb" target="_blank" class="plink">Notebook →</a></div>
+    </div>
+
+    <!-- BUG TRIAGE -->
+    <div class="pcard sci">
+      <span class="pbadge">ML · Product Analytics · Automation</span>
+      <h3 class="ptitle">ML-Powered Bug Triage System @ TCS</h3>
+      <p class="pdesc">Replaced a manual process where engineers read every bug ticket and decided how urgent it was — with an ML model that does this automatically. Dramatically reduced the time engineering teams spent triaging issues.</p>
+      <div class="pimpact">📈 94% classification accuracy · 40% efficiency improvement · 3% annual cost reduction</div>
+      <div class="pstack"><span class="stag">Python</span><span class="stag">XGBoost</span><span class="stag">Feature Engineering</span><span class="stag">REST APIs</span></div>
+      <div class="plinks"><a href="https://www.linkedin.com/in/shrutisharma09/" target="_blank" class="plink">LinkedIn →</a></div>
     </div>
 
   </div>
@@ -1227,77 +638,46 @@
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="contact-inner">
-    <p class="section-label" style="text-align:center">// 05 — Let's Connect</p>
-    <h2 class="section-title animate-on-scroll">Ready to make<br /><em>data work harder.</em></h2>
-    <div class="divider" style="margin: 0 auto 2rem;"></div>
-    <p class="contact-sub animate-on-scroll">
-      I'm actively exploring Data Science, Analytics, and ML Engineering roles where I can drive measurable impact. If you're building something ambitious, let's talk.
-    </p>
-    <div class="contact-links animate-on-scroll">
-      <a href="mailto:shrutisharma.career@gmail.com" class="contact-link">
-        <span>✉️</span> shrutisharma.career@gmail.com
-      </a>
-      <a href="https://www.linkedin.com/in/shrutisharma09/" target="_blank" class="contact-link">
-        <span>💼</span> LinkedIn
-      </a>
-      <a href="https://github.com/shrutishharmacareer" target="_blank" class="contact-link">
-        <span>🐙</span> GitHub
-      </a>
-      <a href="tel:4083342461" class="contact-link">
-        <span>📞</span> 408-334-2461
-      </a>
+  <div class="ci">
+    <p class="section-label" style="text-align:center">// 05 — Let's Talk</p>
+    <h2 class="section-title animate-on-scroll" style="text-align:center">Ready to make<br /><em>data work harder.</em></h2>
+    <p class="csub animate-on-scroll">I'm actively exploring Data Science, Analytics, Data Engineering, and ML/AI roles where I can drive measurable impact. If you're building something ambitious with data — let's connect.</p>
+    <div class="clinks animate-on-scroll">
+      <a href="mailto:shruti.sharma0369@gmail.com" class="clink"><span>✉️</span>shruti.sharma0369@gmail.com</a>
+      <a href="https://www.linkedin.com/in/shrutisharma09/" target="_blank" class="clink"><span>💼</span>LinkedIn</a>
+      <a href="https://github.com/shrutishharmacareer" target="_blank" class="clink"><span>🐙</span>GitHub</a>
+      <a href="tel:6692968881" class="clink"><span>📞</span>669-296-8881</a>
     </div>
-    <p class="animate-on-scroll" style="color: var(--muted); font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.08em;">
-      📍 San Jose, CA · Open to Remote & Hybrid
-    </p>
+    <p class="animate-on-scroll" style="color:var(--muted);font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.08em;">📍 Bay Area, California · Open to Remote & Hybrid</p>
   </div>
 </section>
 
 <footer>
-  <div class="footer-name">Shruti Sharma · Data Scientist & Analyst</div>
-  <div class="footer-note">Built with passion · San Jose, CA · 2025</div>
+  <div class="fn">Shruti Sharma · Data · ML · AI</div>
+  <div class="fnt">Bay Area, CA · shruti.sharma0369@gmail.com · 2025</div>
 </footer>
 
 <script>
-  // Custom cursor
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-  function animCursor() {
-    cursor.style.left = mx + 'px';
-    cursor.style.top = my + 'px';
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px';
-    ring.style.top = ry + 'px';
-    requestAnimationFrame(animCursor);
-  }
-  animCursor();
-  document.querySelectorAll('a, button').forEach(el => {
-    el.addEventListener('mouseenter', () => { ring.style.transform = 'translate(-50%, -50%) scale(1.8)'; ring.style.borderColor = 'var(--amber)'; ring.style.opacity = '0.8'; });
-    el.addEventListener('mouseleave', () => { ring.style.transform = 'translate(-50%, -50%) scale(1)'; ring.style.borderColor = 'var(--amber)'; ring.style.opacity = '0.5'; });
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+  (function a(){cursor.style.left=mx+'px';cursor.style.top=my+'px';rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a);})();
+  document.querySelectorAll('a,button').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.8)';ring.style.opacity='.8';});
+    el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.opacity='.5';});
   });
-
-  // Scroll animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); }
+  const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.05});
+  document.querySelectorAll('.animate-on-scroll,.timeline-item,.pcard').forEach(el=>obs.observe(el));
+  document.querySelectorAll('.pcard').forEach((c,i)=>c.style.transitionDelay=(i*.07)+'s');
+  document.querySelectorAll('.timeline-item').forEach((c,i)=>c.style.transitionDelay=(i*.12)+'s');
+  function filterP(type,btn){
+    document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.pcard').forEach(c=>{
+      c.style.display=(type==='all'||c.classList.contains(type))?'':'none';
     });
-  }, { threshold: 0.12 });
-
-  document.querySelectorAll('.animate-on-scroll, .timeline-item, .project-card').forEach(el => observer.observe(el));
-
-  // Staggered project cards
-  document.querySelectorAll('.project-card').forEach((card, i) => {
-    card.style.transitionDelay = (i * 0.1) + 's';
-  });
-
-  // Staggered timeline items
-  document.querySelectorAll('.timeline-item').forEach((item, i) => {
-    item.style.transitionDelay = (i * 0.15) + 's';
-  });
+  }
 </script>
 </body>
 </html>
